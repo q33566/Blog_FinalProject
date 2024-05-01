@@ -1,36 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Registration Page</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            background-color: #282c34;
-            color: #ffffff;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #3c4049;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-label, input, button {
-    margin: 10px;
-}
-    </style>
+    <link rel="stylesheet" type="text/css" href="./RegistrationPage.css">
 </head>
 <body>
     <h1>Registration Page</h1>
     
-    <form>
+    <form novalidate action="./HomePage.html">
         <label for="id">ID:</label>
         <input type="text" id="id" name="id" required>
         
@@ -45,5 +23,6 @@ label, input, button {
         
         <button type="submit">Register</button>
     </form>
+    <script src="./RegistrationPage.js"></script>
 </body>
 </html>
