@@ -36,15 +36,13 @@
         function isValidLogin(){
             let email = document.getElementById('email');
             let password = document.getElementById('password');
-            console.log(email.value)
-            console.log(password.value)
             // Clear previous error messages
             document.querySelectorAll('.error').forEach(function(error) {
                 error.remove();
                 canSubmit = true;
             });
-            if(isExistEmail(email,"123@gmail.com")){
-                if(isCorrectPassword(password,"123")){
+            if(isExistEmail(email.value,'123@gmail.com')){
+                if(isCorrectPassword(password.value,'123')){
                     return true;
                 }
                 password.insertAdjacentHTML('afterend', '<div class="error">密碼錯誤</div>');
