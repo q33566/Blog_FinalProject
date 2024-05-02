@@ -172,8 +172,8 @@ html {
 }
 
 body {
-	background: #D4D9DD url("images/bg03.jpg");
-	color: #474f51;
+	background: #282c34 url("images/bg03.jpg");
+	color: #ffffff;
 	font-size: 13.5pt;
 	font-family: 'Yanone Kaffeesatz';
 	line-height: 1.85em;
@@ -183,7 +183,7 @@ body {
 input,
 textarea,
 select {
-	color: #474f51;
+	color: #3c4049;
 	font-size: 13.5pt;
 	font-family: 'Yanone Kaffeesatz';
 	line-height: 1.85em;
@@ -1700,13 +1700,13 @@ section:last-child,
 /* Content */
 
 #content {
-	background: #f7f7f7 url("images/bg04.png");
+	background: #3c4049 url("images/bg04.png");
 	border-top: solid 1px #fff;
 	padding: 45px 0 45px 0;
 }
 
 #content section {
-	background: #fff;
+	background: #282c34;
 	padding: 40px 30px 45px 30px;
 	box-shadow: 2px 2px 2px 1px rgba(128, 128, 128, 0.1);
 	margin: 0 0 25px 0;
@@ -1714,7 +1714,7 @@ section:last-child,
 
 #content h2 {
 	font-size: 1.8em;
-	color: #373f42;
+	color: #ffffff;
 	margin: 0 0 0.25em 0;
 }
 
