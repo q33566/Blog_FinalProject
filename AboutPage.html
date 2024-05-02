@@ -8,9 +8,21 @@
 </head>
 
 <body>
-    <nav>
-        <a href="HomePage.html">Home</a>
-        <a href="AboutPage.html">About</a>
+    <!-- Nav -->
+    <nav class="navbar fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="HomePage.html" id="logo">
+                <h1>Blog</h1>
+            </a>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ml-auto text-center">
+                    <li class="nav-item"><a class="nav-link" href="ArticlePage.html">發表文章</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutPage.html">關於</a></li>
+                    <li class="nav-item"><a class="nav-link" href="RegisterPage.html">註冊</a></li>
+                    <li class="nav-item"><a class="nav-link" href="LoginPage.html">登入</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
     <span class="editButton">Edit</span>
     <h1>About the Author</h1>
@@ -25,11 +37,22 @@
     </div>
 
     <h3>Connect with me:</h3>
-    <a href="https://github.com/johndoe" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/johndoe" target="_blank">LinkedIn</a>
-    <a href="https://twitter.com/johndoe" target="_blank">Twitter</a>
+    <div class="social_media">
+        <a href="https://www.facebook.com/" target="_blank" class="social_media_link">
+            <img src="./facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" class="social_media_link">
+            <img src="./instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" class="social_media_link">
+            <img src="./linkedin.png" alt="LinkedIn">
+        </a>
+        <a href="https://twitter.com/" target="_blank" class="social_media_link">
+            <img src="./twitter.png" alt="Twitter">
+        </a>
+    </div>
 
-    <script src="assets/css/AboutPage.js"></script>
+    <script src="assets/js/AboutPage.js"></script>
 </body>
 
 </html>
