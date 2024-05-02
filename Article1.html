@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Article Page</title>
+    <link rel="stylesheet" href="assets/css/ArticlePage.css" />
+</head>
+
+<body>
+    <div>
+        <nav class="navbar fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="HomePage.html" id="logo">
+                    <h1>Blog</h1>
+                </a>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav ml-auto text-center">
+                        <li class="nav-item"><a class="nav-link" href="ArticlePage.html">發表文章</a></li>
+                        <li class="nav-item"><a class="nav-link" href="AboutPage.html">關於</a></li>
+                        <li class="nav-item"><a class="nav-link" href="LoginPage.html">登入</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div>
+        <!-- Nav -->
+        <!-- Content -->
+        <section id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Main Content -->
+                        <section>
+                            <header>
+                            </header>
+                            <h2 style="padding-left:100px;">Title</h2>
+                            <p style="margin:10px; padding-left:100px">蘑菇街商品的信息，一个接一个，衔接紧密，根据浏览器大小有几列，元素等宽不等高，向下滑动加载
+                                就是常见的瀑布流布局，
+
+                                实现瀑布流布局有三种方式，JavaScript原生，jQuery，和CSS3 column方法。
+
+                                我写了JavaScript 和jQuery两种。
+
+                                jQuery相对于js的优点就是，获取，定义，遍历元素方便，有很多封装的函数，支持连缀，隐式迭代。
+
+                                如要获取一个类名为box的元素，js需要写一个函数，而jQuery 只需要$('#main>div)，
+
+                                如果要遍历元素，js需要写一个for函数，而jQuery只需要each函数，
+
+                                如果要获取数组中指定元素的索引，js需要写一个函数，而jQuery只需要inArray函数，
+
+                                如果要写元素的样式，js需要单独定义style，而jQuery只需要css函数。
+
+                                jQuery思路就是
+
+                                1、 html写好整体的盒子框架，div块，
+
+                                2、css 设置好图片的相对定位，样式，块元素，浮动，
+
+                                3、jquery
+
+                                封装成一个函数 waterfall()
+
+                                （1）根据浏览器的宽度和定义的图片的统一的宽度来计算有几列。
+
+                                （2）获取第一行图片的高度，找到最矮的索引让第二行第一个元素排列在下面。
+
+                                （3）定位图片的位置要修改css样式，并要实时更新高度数组，以便下一个图片定位到正确的位置。
+
+                                封装成一个函数 checkScrollSlide()
+
+                                （4）判断是否要加载的情况，规定当最后一个图片露出一半的时候开始加载。
+
+                                （5）如何判断，比较 最后一个图片到父元素盒子的高度加上自身一半的高度 和 浏览器窗口的高度加上滚动条滚过的高度，
+
+                                因为前者是固定的，后者随着滑动变化，如果前者大于后者，说明还没滑到，如果小于后者，就说明是时候加载了。
+                                ————————————————
+
+                                版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+
+                                原文链接：https://blog.csdn.net/qq_42114918/article/details/83420383</p>
+                            <h2 style="padding-left:100px;">留言</h2>
+                            <form action="ArticlePage.html" method="post">
+                                <ul style="padding-left:100px;" class="actions">
+
+                                    <li><label for="\n"></li>
+                                    <li>
+                                        <textarea id="content" name="content"
+                                            style="width: 1140px;height: 200px; resize: none; padding-left:100px;"
+                                            required></textarea>
+                                    </li>
+
+                                    <button type="submit" class="submitbutton">發表</button>
+                                </ul>
+                            </form>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="assets/js/ArticlePage.js"></script>
+</body>
+
+</html>
