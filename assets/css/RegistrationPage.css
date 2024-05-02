@@ -25,3 +25,88 @@ label, input, button {
     font-size: 0.8em;
     color: rgb(255, 70, 70);
 }
+
+/*navbar*/
+
+
+.navbar {
+    background-color: #7e7e7e;
+    font-size: 0.875rem;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    margin-right: 1.25rem;
+    line-height: inherit;
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+.navbar-brand:hover {
+    background-color: #8d8d8d;
+}
+
+.navbar-collapse {
+    display: flex;
+    align-items: center;
+    flex-basis: auto;
+    height: 100%;
+}
+
+.navbar-collapse ul {
+    height: 100%;
+    flex-grow: 1;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    align-items: stretch;
+}
+
+li {
+    display: list-item;
+    unicode-bidi: isolate;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+ul {
+    list-style: none;
+}
+
+.nav-item .nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-item :hover {
+    background-color: #8d8d8d;
+}
