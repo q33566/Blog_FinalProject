@@ -13,7 +13,8 @@ body {
     border-radius: 10px;
     padding: 20px;
     text-align: center;
-    max-width: 600px;  /* 你可以根据需要调整这个值 */
+    max-width: 600px;
+    /* 你可以根据需要调整这个值 */
     margin: 10px auto;
 }
 
@@ -33,7 +34,7 @@ body {
 }
 
 .navbar {
-    background-color:#7e7e7e;
+    background-color: #7e7e7e;
     font-size: 0.875rem;
     align-items: center;
     justify-content: flex-start;
@@ -58,13 +59,13 @@ body {
     line-height: inherit;
     display: block;
     padding: 0.5rem 1rem;
-    color: #ffffff; 
+    color: #ffffff;
     text-decoration: none;
 
 }
 
 .navbar-brand:hover {
-    background-color: #8d8d8d; 
+    background-color: #8d8d8d;
 }
 
 .navbar-collapse {
@@ -74,7 +75,7 @@ body {
     height: 100%;
 }
 
-.navbar-collapse ul{
+.navbar-collapse ul {
     height: 100%;
     flex-grow: 1;
 }
@@ -100,18 +101,17 @@ li {
     margin-left: auto;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-.nav-item 
-.nav-link {
+.nav-item .nav-link {
     display: block;
     padding: 0.5rem 1rem;
-    color: #ffffff; 
+    color: #ffffff;
     text-decoration: none;
 }
 
 .nav-item :hover {
-    background-color: #8d8d8d; 
+    background-color: #8d8d8d;
 }
