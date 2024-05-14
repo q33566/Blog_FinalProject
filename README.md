@@ -6,3 +6,17 @@
 6. 可以用訪客模式登入留言
 7. 可以從不同種類文章頁面跳轉(仍要保持登入狀態)
 8. 至少四種頁面切換
+
+# Github Commit Convention
+- feat: new feature
+- modify: modify existing function
+- fix: fix bug
+- doc: update doc
+- style : code format modification
+- test: test
+- ...
+
+代辦清單:
+資料庫連接
+登入
+CSS統一
