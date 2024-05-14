@@ -15,3 +15,8 @@
 - style : code format modification
 - test: test
 - ...
+
+代辦清單:
+資料庫連接
+登入
+CSS統一
