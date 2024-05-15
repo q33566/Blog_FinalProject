@@ -44,7 +44,9 @@ def create_app(test_config=None):
             hed = '<h1>Something is broken.</h1>'
             return hed + error_text
 
-    
+    @app.route('/')
+    def index():
+        return db.index()
     #from . import auth
     #app.register_blueprint(auth.bp)
     
