@@ -1,5 +1,8 @@
 import os
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import text
+from flask import g
 
 def create_app(test_config=None):
     # create and configure the app
@@ -25,13 +28,25 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/hello')
     def hello():
-        return 'Hello, World!'
+        return "Hello, World!"
     
     from . import db
     db.init_app(app)
     
-    from . import auth
-    app.register_blueprint(auth.bp)
+    @app.route('/testdb')
+    def testdb():
+        try:
+            db.myDataBase.session.query(text('1')).from_statement(text('SELECT 1')).all()
+            return '<h1>It works.</h1>'
+        except Exception as e:
+            # e holds description of the error
+            error_text = "<p>The error:<br>" + str(e) + "</p>"
+            hed = '<h1>Something is broken.</h1>'
+            return hed + error_text
+
+    
+    #from . import auth
+    #app.register_blueprint(auth.bp)
     
     #from . import login
     #login.login_manager.init_app(app)
