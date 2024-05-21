@@ -1,56 +1,78 @@
-import os
-from flask import Flask
+from flask import Flask,redirect,url_for,render_template,request,session
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import text
-from flask import g
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
+from sqlalchemy.exc import IntegrityError
+from flask import flash
+import re
+DB_NAME = 'blog.db'
 
-def create_app(test_config=None):
-    # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
-    )
+app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + DB_NAME
+db = SQLAlchemy()
+db.init_app(app)
+
+class User(db.Model):
+    __tablename__  = 'USER_INFO'
+    user_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
+    email: Mapped[str] = mapped_column(String(30), nullable=True)
+    password: Mapped[str] = mapped_column(String(30), nullable=True)
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        user = User.query.filter_by(user_id=user_id).first()
+        if user:
+            flash('user_id已經存在 請重新輸入','user_id')
+            return redirect(url_for('register'))
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('email已經存在，請重新輸入')
+            return redirect(url_for('register', 'email'))
+
+        if len(password) < 8 or not re.search("[a-z]", password) or not re.search("[A-Z]", password) or not re.search("[!@#$%^&*()]", password):
+            flash('密碼必須大於8個字且包含至少一個大寫字母，至少一個小寫字母，至少一個特殊字元','password')
+            return redirect(url_for('register'))
+
+        if password != confirm_password:
+            flash('密碼不相同', 'confirm_password')
+            return redirect(url_for('register'))
+
+        new_user = User(user_id=user_id, email=email, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('註冊成功')
+        return redirect(url_for('register'))
     else:
-        # load the test config if passed in
-        app.config.from_mapping(test_config)
+        return render_template('auth/register.html')
 
-    # ensure the instance folder exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        password = request.form['password']
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return "Hello, World!"
-    
-    from . import db
-    db.init_app(app)
-    
-    @app.route('/testdb')
-    def testdb():
-        try:
-            db.myDataBase.session.query(text('1')).from_statement(text('SELECT 1')).all()
-            return '<h1>It works.</h1>'
-        except Exception as e:
-            # e holds description of the error
-            error_text = "<p>The error:<br>" + str(e) + "</p>"
-            hed = '<h1>Something is broken.</h1>'
-            return hed + error_text
+        user = User.query.filter_by(user_id=user_id).first()
+        if not user:
+            flash('帳號不存在')
+            return redirect(url_for('login'))
+        if user.password != password:
+            flash('密碼錯誤')
+            return redirect(url_for('login'))
+        session['user_id'] = user.user_id
+        return redirect(url_for('index'))
+    return render_template('auth/login.html')
 
-    @app.route('/')
-    def index():
-        return db.index()
-    #from . import auth
-    #app.register_blueprint(auth.bp)
-    
-    #from . import login
-    #login.login_manager.init_app(app)
-    
-    return app
+@app.route('/index')
+def index():
+    users = User.query.all()  # get all rows from USER_INFO table
+    return render_template('index.html', users=users, sayHello='Hello World!')    

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/login.css')}}">
+{% endblock head %}
+{% block body %}
+{% for user in users %}
+<script>
+    console.log("{{ sayHello }}");
+    console.log("{{ user }}");
+</script>
+<p>{{ user }}</p>  <!-- assuming your UserInfo model has a username field -->
+{% endfor %}
+{% endblock body %}

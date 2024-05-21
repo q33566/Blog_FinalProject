@@ -5,20 +5,40 @@
 {% endblock head %}
 {% block body %}
 <h1>Registration Page</h1>
-<form novalidate method="post">
-    <label for="userId">ID:</label>
-    <input name="username" id="userId">
+    <form novalidate method="post">
+
+    <label for="user_id">ID:</label>
+    <input name="user_id" id="user_id" value="{{ request.form.user_id }}">
+    {% with messages = get_flashed_messages(category_filter=["user_id"]) %}
+    {% if messages %}
+    <p class="error">{{ messages[0] }}</p>
+    {% endif %}
+    {% endwith %}
 
     <label for="email">Email:</label>
-    <input name="email" id="email">
+    <input name="email" id="email" value="{{ request.form.email }}">
+    {% with messages = get_flashed_messages(category_filter=["email"]) %}
+    {% if messages %}
+    <p class="error">{{ messages[0] }}</p>
+    {% endif %}
+    {% endwith %}
 
     <label for="password">Password:</label>
     <input type="password" name="password" id="password" required>
+    {% with messages = get_flashed_messages(category_filter=["password"]) %}
+    {% if messages %}
+    <p class="error">{{ messages[0] }}</p>
+    {% endif %}
+    {% endwith %}
 
     <label for="confirm_password">Confirm Password:</label>
-    <input type="password" name="confirm_password" id="confirm_password"  required>
-
-    <input type="submit" value="Register">
-</form>
+    <input type="password" name="confirm_password" id="confirm_password" required>
+    {% with messages = get_flashed_messages(category_filter=["confirm_password"]) %}
+    {% if messages %}
+    <p class="error">{{messages[0]}}</p>
+    {% endif %}
+    {% endwith %}
+    <button type="submit">註冊</button>
+    </form>
 <script src="assets/js/RegistrationPage.js"></script>
 {% endblock body %}
