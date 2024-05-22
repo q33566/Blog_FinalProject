@@ -1,13 +1,9 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-    <meta charset="UTF-8" />
-    <title>Article Page</title>
+{% extends "base.html" %}
+{% block title %}Article Page{% endblock title %}
+{% block head %}
     <link rel="stylesheet" href="assets/css/ArticlePage.css" />
-</head>
-
-<body>
+{% endblock head %}
+{% block body %}
     <div>
     <nav class="navbar fixed-top">
         <div class="container">
@@ -80,7 +76,5 @@
 
 
     <!-- Scripts -->
-    <script src="assets/js/ArticlePage.js"></script>
-</body>
-
-</html>
+    <script src="static/js/ArticlePage.js"></script>
+{% endblock body %}

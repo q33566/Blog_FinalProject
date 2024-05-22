@@ -1,24 +1,21 @@
 <!DOCTYPE HTML>
-<html>
-
-<head>
-    <meta charset="UTF-8" />
-    <title>Home Page</title>
-    <link rel="stylesheet" href="assets/css/HomePage.css" />
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock title %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename=css/HomePage.css)}}">
+{% endblock head %}
+{% block body %}
     <!-- Nav -->
     <nav class="navbar fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="HomePage.html" id="logo">
+            <a class="navbar-brand" href="{{url_for('home')}}" id="logo">
                 <h1>Blog</h1>
             </a>
             <div class="navbar-collapse">
                 <ul class="navbar-nav ml-auto text-center">
-                    <li class="nav-item"><a class="nav-link" href="ArticlePage.html">發表文章</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AboutPage.html">關於</a></li>
-                    <li class="nav-item"><a class="nav-link" href="LoginPage.html">登入</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('home')}}">發表文章</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('register')}}">關於</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">登入</a></li>
                 </ul>
             </div>
         </div>
@@ -71,7 +68,5 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/HomePage.js"></script>
-</body>
-
-</html>
+    <script src="static/js/HomePage.js"></script>
+{% endblock body %}

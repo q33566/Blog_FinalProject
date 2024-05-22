@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>About Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/AboutPage.css') }}">
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title %}About Page{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/AboutPage.css') }}">
+{% endblock head %}
+{% block body %}
     <!-- Nav -->
     <nav class="navbar fixed-top">
         <div class="container">
@@ -52,6 +48,4 @@
     </div>
 
     <script src="assets/js/AboutPage.js"></script>
-</body>
-
-</html>
+{% endblock body %}

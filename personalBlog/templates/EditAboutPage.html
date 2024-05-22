@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Page</title>
+{% extends "base.html" %}
+{% block title %}Edit Page{% endblock title %}
+{% block head %}
     <link rel="stylesheet" type="text/css" href="assets/css/EditAboutPage.css">
-</head>
-
-<body>
+{% endblock head %}
+{% block body %
     <nav class="navbar fixed-top">
         <div class="container">
             <a class="navbar-brand" href="HomePage.html" id="logo">
@@ -40,7 +36,5 @@
         <button type="submit">Submit</button>
     </form>
 
-    <script src="assets/css/EditPage.js"></script>
-</body>
-
-</html>
+    <script src="static/css/EditPage.js"></script>
+{% endblock body %}
