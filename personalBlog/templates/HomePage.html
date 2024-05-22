@@ -19,33 +19,19 @@
         <section id="content">
             <div class="container">
                 <div class="row aln-center">
-                    <div class="col-4 col-12-medium">
-                        <!-- Box #1 -->
-                        <section>
-                            <header>
-                                <h2><a style="color:white;" href="Article1.html">Title</a></h2>
-                            </header>
-                            <p>文章簡介</p>
-                        </section>
-                    </div>
+                    <section>
+                        <th>文章列表</th>
+                    </section>
+                    {% for post in posts %}
                     <div class="col-4 col-6-medium col-12-small">
-                        <!-- Box #2 -->
                         <section>
                             <header>
-                                <h2>文章2</h2>
+                                <h2>{{ post.title }}</h2>
                             </header>
-                            <p>文章簡介</p>
+                            <p>{{ post.content }}</p>
                         </section>
                     </div>
-                    <div class="col-4 col-6-medium col-12-small">
-                        <!-- Box #3 -->
-                        <section>
-                            <header>
-                                <h2>文章3</h2>
-                            </header>
-                            <p>文章簡介</p>
-                        </section>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>

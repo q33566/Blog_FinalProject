@@ -21,6 +21,15 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(String(30), nullable=True)
     password: Mapped[str] = mapped_column(String(30), nullable=True)
 
+class Post(db.Model):
+    __tablename__ = 'POST'
+    post_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
+    user_id: Mapped[int] = mapped_column(String(30), nullable=True)
+    title: Mapped[str] = mapped_column(String(30), nullable=True)
+    content: Mapped[str] = mapped_column(String(30), nullable=True)
+    tag: Mapped[str] = mapped_column(String(30), nullable=True)
+    time: Mapped[str] = mapped_column(String(30), nullable=True)
+
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
@@ -79,7 +88,8 @@ def index():
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-    return render_template('HomePage.html')
+    posts=Post.query.all()
+    return render_template('HomePage.html',posts=posts)
 
 @app.route('/article', methods=['POST', 'GET'])
 def article():
