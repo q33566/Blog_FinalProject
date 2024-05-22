@@ -76,3 +76,15 @@ def login():
 def index():
     users = User.query.all()  # get all rows from USER_INFO table
     return render_template('index.html', users=users, sayHello='Hello World!')    
+
+@app.route('/home')
+def home():
+    return render_template('HomePage.html')
+
+@app.route('/article')
+def article():
+    return render_template('ArticlePage.html')
+
+@app.route('/about')
+def about():
+    return render_template('AboutPage.html')
