@@ -77,14 +77,14 @@ def index():
     users = User.query.all()  # get all rows from USER_INFO table
     return render_template('index.html', users=users, sayHello='Hello World!')    
 
-@app.route('/home')
+@app.route('/home', methods=['POST', 'GET'])
 def home():
     return render_template('HomePage.html')
 
-@app.route('/article')
+@app.route('/article', methods=['POST', 'GET'])
 def article():
     return render_template('ArticlePage.html')
 
-@app.route('/about')
+@app.route('/about', methods=['POST', 'GET'])
 def about():
     return render_template('AboutPage.html')
