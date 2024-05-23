@@ -32,35 +32,45 @@ class Post(db.Model):
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    hasError = False
     if request.method == 'POST':
         user_id = request.form['user_id']
         email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
+        
+        if user_id == '': 
+            flash('user_id不能為空','user_id')
+            hasError = True
+        else:
+            user = User.query.filter_by(user_id=user_id).first()
+            if user:
+                flash('user_id已經存在 請重新輸入','user_id')
+                hasError = True
 
-        user = User.query.filter_by(user_id=user_id).first()
-        if user:
-            flash('user_id已經存在 請重新輸入','user_id')
-            return redirect(url_for('register'))
-
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash('email已經存在，請重新輸入')
-            return redirect(url_for('register', 'email'))
-
+        if email == '':
+            flash('email不能為空','email')
+            hasError = True
+        else:
+            user = User.query.filter_by(email=email).first()
+            if user:
+                flash('email已經存在，請重新輸入','email')
+                hasError = True
         if len(password) < 8 or not re.search("[a-z]", password) or not re.search("[A-Z]", password) or not re.search("[!@#$%^&*()]", password):
             flash('密碼必須大於8個字且包含至少一個大寫字母，至少一個小寫字母，至少一個特殊字元','password')
-            return redirect(url_for('register'))
-
+            hasError = True
         if password != confirm_password:
             flash('密碼不相同', 'confirm_password')
+            hasError = True
+        
+        if(hasError):
             return redirect(url_for('register'))
-
-        new_user = User(user_id=user_id, email=email, password=password)
-        db.session.add(new_user)
-        db.session.commit()
-        flash('註冊成功')
-        return redirect(url_for('register'))
+        else:
+            new_user = User(user_id=user_id, email=email, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('註冊成功','success')
+            return redirect(url_for('login'))
     else:
         return render_template('auth/register.html')
 
@@ -85,6 +95,12 @@ def login():
 def index():
     users = User.query.all()  # get all rows from USER_INFO table
     return render_template('index.html', users=users, sayHello='Hello World!')    
+@app.route('/insert')
+def insert():
+    new_user = User(user_id='123', email = '12@gmail.com', password = '123')
+    db.session.add(new_user)
+    db.session.commit()
+    return None
 
 @app.route('/home', methods=['POST', 'GET'])
 def home():

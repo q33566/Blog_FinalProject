@@ -40,5 +40,11 @@
     {% endwith %}
     <button type="submit">註冊</button>
     </form>
-<script src="static/js/RegistrationPage.js"></script>
+    {% with messages = get_flashed_messages(category_filter=['success']) %}
+    {% if messages %}
+    <script>
+        alert("{{ messages[0] }}");
+    </script>
+    {% endif %}
+    {% endwith %}
 {% endblock body %}
