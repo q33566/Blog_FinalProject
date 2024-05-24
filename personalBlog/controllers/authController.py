@@ -2,7 +2,7 @@ from flask import redirect,url_for,render_template,request,session,flash, Bluepr
 from personalBlog.models.user import User
 import re
 from personalBlog.db import db
-auth = Blueprint('auth', __name__, template_folder='templates/auth')
+
 def registerDef():
     hasError = False
     if request.method == 'POST':
