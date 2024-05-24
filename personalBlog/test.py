@@ -6,6 +6,8 @@ from sqlalchemy.exc import IntegrityError
 from flask import flash
 import re
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-db = SQLAlchemy()
-db.init_app(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+# db = SQLAlchemy()
+# db.init_app(app)
+class thaha:
+    hi = 'll'
