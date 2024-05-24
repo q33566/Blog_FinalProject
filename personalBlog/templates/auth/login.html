@@ -4,6 +4,15 @@
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/login.css')}}">
 {% endblock head %}
 {% block body %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <script>
+        alert("{{ messages }}");
+    </script>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <h1>Login</h1>
     <form novalidate>
         <label for="user_name">Email:</label>
@@ -13,7 +22,7 @@
         <input type="password" name="password" id="password"  required>
 
         <input type="submit" value="Login">
-        <a class="enroll" href="{{url_for('register')}}">註冊</a>
+        <a class="enroll" href="{{url_for('auth.register')}}">註冊</a>
     </form>
     <script src="static/js/LoginPage.js"></script>
 {% endblock body %}
