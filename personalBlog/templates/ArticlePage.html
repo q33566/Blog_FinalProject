@@ -17,35 +17,23 @@
                             <header>
                                 <h2>發表文章</h2>
                             </header>
-                            <form action="ArticlePage.html" method="post">
+                            <form action="{{url_for('article')}}" method="post">
                                 <ul class="actions">
-                                    <li>
-                                        <label for="title">標題:</label>
-                                    </li>
+                                    <li><label for="title">標題:</label></li>
                                     <input type="text" id="title" name="title" style="width: 1140px;" required>
                                 </ul>
                                 <ul class="actions">
-                                    <li>
-                                        <label for="category">分類:</label>
-                                    </li>
-                                    <input type="text" id="category" name="category" style="width: 1140px;" required>
+                                    <li><label for="tag">分類:</label></li>
+                                    <input type="text" id="tag" name="tag" style="width: 1140px;" required>
                                 </ul>
                                 <ul class="actions">
-                                    <li>
-                                        <label for="content">簡介:</label>
-                                    </li>
-                                    <input type="text" id="content" name="content" style="width: 1140px;" required>
+                                    <li><label for="intro">簡介:</label></li>
+                                    <input type="text" id="intro" name="intro" style="width: 1140px;" required>
                                 </ul>
                                 <ul class="actions">
-                                    <li>
-                                        <label for="content">內容:</label>
-                                    </li>
-                                    <li><label for="\n"></li>
-                                    <li>
-                                        <textarea id="content" name="content"
-                                            style="width: 1140px;height: 200px; resize: none;" required></textarea>
-                                    </li>
-
+                                    <li><label for="content">內容:</label></li>
+                                    <li><textarea id="content" name="content"
+                                            style="width: 1140px;height: 200px; resize: none;" required></textarea></li>
                                     <button type="submit" class="submitbutton">發表</button>
                                 </ul>
                             </form>
@@ -56,8 +44,4 @@
             </div>
         </section>
     </div>
-
-
-    <!-- Scripts -->
-    <script src="/static/js/ArticlePage.js"></script>
 {% endblock body %}

@@ -10,8 +10,8 @@
 |Field|Data type|Attribute|
 |--|--|--|
 |post_id|INTEGER|Primary Key, Unique, Not null|
-|user_id|INTEGER|Foreign Key|
 |title|TEXT|Not null|
-|content|TEXT|Not null|
 |tag|TEXT|Not null|
+|intro|TEXT|Not null|
+|content|TEXT|Not null|
 |time|TEXT|Not null|
