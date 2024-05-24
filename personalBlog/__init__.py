@@ -5,6 +5,7 @@ from sqlalchemy import String
 from sqlalchemy.exc import IntegrityError
 from flask import flash
 import re
+import datetime
 DB_NAME = 'blog.db'
 
 app = Flask(__name__)
@@ -17,7 +18,7 @@ db.init_app(app)
 
 class User(db.Model):
     __tablename__  = 'USER_INFO'
-    user_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
+    user_id: Mapped[int] = mapped_column(primary_key=True, nullable=True, autoincrement=True)
     email: Mapped[str] = mapped_column(String(30), nullable=True)
     password: Mapped[str] = mapped_column(String(30), nullable=True)
 
@@ -109,6 +110,16 @@ def home():
 
 @app.route('/article', methods=['POST', 'GET'])
 def article():
+    if request.method == 'POST':
+        title = request.form['title']  
+        tag = request.form['tag']
+        intro = request.form['intro']
+        content = request.form['content']
+        time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        new_post = Post(title=title, tag=tag, intro=intro, content=content, time=time)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect(url_for('home'))
     return render_template('ArticlePage.html')
 
 @app.route('/about', methods=['POST', 'GET'])
