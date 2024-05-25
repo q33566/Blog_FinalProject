@@ -16,22 +16,6 @@ body {
     /* 你可以根据需要调整这个值 */
     margin: 10px auto;
 }
-
-.editButton {
-    position: absolute;
-    border-radius: 10px;
-    bottom: 30px;
-    right: 15%;
-    background-color: rgb(154, 154, 154);
-    padding: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.editButton:hover {
-    background-color: gray;
-}
-
 .navbar {
     background-color: #7e7e7e;
     font-size: 0.875rem;
@@ -113,36 +97,4 @@ ul {
 
 .nav-item :hover {
     background-color: #8d8d8d;
-}
-
-/* Main_tab */
-.Main_tab ul {
-    display: flex;
-    gap: 8px;
-    overflow-x: scroll;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    vertical-align: baseline;
-    font-size: 12px;
-    color: #0a0a0a;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    padding-inline-start: 40px;
-    unicode-bidi: isolate;
-}
-
-.Main_tab ul::-webkit-scrollbar {
-    display: none;
-}
-
-.Main_tab ul li {
-    padding: 10px 20px;
-    background: #f1f1f1;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: 0.3s;
 }
