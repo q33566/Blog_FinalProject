@@ -1,4 +1,7 @@
 from flask import Blueprint
+from personalBlog.controllers.authController import  registerDef, loginDef, logoutDef
+from personalBlog.controllers.postController import homeDef, articleDef
+from flask_login import login_required, logout_user
 from personalBlog.controllers.authController import  registerDef, loginDef
 from personalBlog.controllers.postController import homeDef, articleDef, editDef, editarticleDef, deletearticleDef
 auth = Blueprint('auth', __name__, template_folder='templates/auth')
@@ -12,6 +15,11 @@ def register():
 def login():
     return loginDef()
 
+@auth.route('/logout')
+@login_required
+def logout():
+    return logoutDef()
+    
 @post.route('/home', methods=['POST', 'GET'])
 def home():
     return homeDef()

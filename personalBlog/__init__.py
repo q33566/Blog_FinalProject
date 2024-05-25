@@ -15,6 +15,9 @@ app.register_blueprint(post, url_prefix='/post')
 from . import db
 db.init_db(app)
 
+from personalBlog.controllers.authController import login_manager
+login_manager.init_app(app)
+
 
 
 
