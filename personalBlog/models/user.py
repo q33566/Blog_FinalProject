@@ -13,8 +13,7 @@ class User(UserMixin, db.Model):
         """初始化"""
         self.user_id = user_id
         self.email = email
-        # 實際存入的為password_hash，而非password本身
-        self.password_hash = password
+        self.password = password
     def get_id(self):
         return self.user_id
     
