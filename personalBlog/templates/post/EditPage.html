@@ -1,32 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock title %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/HomePage.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/post.css')}}">
 {% endblock head %}
 {% block body %}
-{% with messages = get_flashed_messages(category_filter=["login_success"]) %}
-{% if messages %}
-{% for message in messages %}
-<script>
-    alert("{{ messages }}");
-</script>
-{% endfor %}
-{% endif %}
-{% endwith %}
     <div>
         <!-- space -->
         <section id='space'>
             <br></br>
             <br></br>
-        </section>
-        <!-- Main Tab -->
-        <section id="index_main_tab" class="Main_tab">
-            <ul class="Main_tab_index">
-                <li id="recommandedArticle">推薦</li>
-                <li id="tagArticle">標籤</li>
-                <li id="newestArticle">最新</li>
-                <li id="hotArticle">熱門</li>
-            </ul>
         </section>
         <!-- Content -->
         <section id="content">
@@ -34,14 +16,21 @@
                 <div class="row aln-center">
                     <!-- recommandedArticleList -->
                     <section id="recommandedArticleList" >
-                        <th>推薦文章列表</th>
+                        <th><h1>文章列表</h1></th>
                         {% for post in posts %}
                         <div class="col-4 col-6-medium col-12-small">
                             <section>
                                 <header>
                                     <h2>{{ post.title }}</h2>
+                                    <tr>
+                                    <form action="{{url_for('post.editarticle',id=post.post_id)}}" method="get">
+                                        <input type="hidden" value="{{ post.post_id }}">
+                                        <button type="submit" id="{{ post.post_id }}" class="submitbutton">編輯</button>
+                                    </form></tr>
+                                    <tr><form action="{{url_for('post.deletearticle',id=post.post_id)}}" method="get">
+                                        <button class="submitbutton" type="submit" >刪除</button>
+                                    </form></tr>
                                 </header>
-                                <p>{{ post.content }}</p>
                             </section>
                         </div>
                         {% endfor %}
