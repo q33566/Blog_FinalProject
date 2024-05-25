@@ -9,12 +9,12 @@
 <body>
     <nav class="navbar fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{url_for('home')}}" id="logo">
+            <a class="navbar-brand" href="{{url_for('post.home')}}" id="logo">
                 <h1>Blog</h1>
             </a>
             <div class="navbar-collapse">
                 <ul class="navbar-nav ml-auto text-center">
-                    <li class="nav-item"><a class="nav-link" href="{{url_for('article')}}">發表文章</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('post.article')}}">發表文章</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('about')}}">關於</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('auth.login')}}">登入</a></li>
                 </ul>
