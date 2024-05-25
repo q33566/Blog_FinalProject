@@ -14,14 +14,13 @@
     {% endif %}
     {% endwith %}
     <h1>Login</h1>
-    <form novalidate>
-        <label for="user_name">Email:</label>
-        <input type="user_name" name="user_name" id="user_name" required>
-
+    <form novalidate method='post'>
+        {{ form.hidden_tag() }}
+        <label for="user_id">Email:</label>
+        {{ form.user_id(id='user_id') }}    
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password"  required>
-
-        <input type="submit" value="Login">
+        {{ form.password(id='password') }}
+        <button type="submit">Login</button>
         <a class="enroll" href="{{url_for('auth.register')}}">註冊</a>
     </form>
     <script src="static/js/LoginPage.js"></script>
