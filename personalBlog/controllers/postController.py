@@ -5,7 +5,10 @@ from personalBlog.db import db
 
 
 def homeDef():
-    #posts=Post.query.all()
+    if request.method == 'POST':
+        posts=Post.query.all()
+        return render_template('post/HomePage.html',posts=posts)
+    posts=Post.query.all()
     return render_template('post/HomePage.html',posts=posts)
 
 
