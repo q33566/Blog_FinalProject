@@ -1,5 +1,6 @@
 from flask import redirect,url_for,render_template,request,session,flash, Blueprint
 from personalBlog.models.post import Post, Comment
+from personalBlog.models.user import User
 import datetime
 from personalBlog.db import db
 from flask_login import current_user
@@ -69,10 +70,11 @@ def deletearticleDef(id):
 def articleViewDef(id):
     if request.method == 'POST':
         post_id = id
+        
         user_id = current_user.user_id
         comment = request.form['comment']
         time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        new_comment = Comment(post_id=post_id, comment=comment, time=time)
+        new_comment = Comment(post_id=post_id, comment=comment, time=time, user_id = user_id)
         db.session.add(new_comment)
         db.session.commit()
         return redirect(url_for('post.articleview', id=post_id))

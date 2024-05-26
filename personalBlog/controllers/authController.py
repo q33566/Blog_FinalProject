@@ -12,7 +12,7 @@ login_manager.login_message = '請先登入'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return User.query.get(user_id)      
 
 def logoutDef():
     logout_user()
@@ -43,7 +43,8 @@ def loginDef():
             return redirect(url_for('auth.login'))
 
         login_user(user)
+
         flash('登入成功','login_success')
-        return redirect(url_for('post.home'))  # redirect to the index page after successful login
+        return redirect(url_for('post.home',style='recommanded_view'))  # redirect to the index page after successful login
 
     return render_template('auth/login.html', form = form)  # render the login formfrom flask import request, flash, session
