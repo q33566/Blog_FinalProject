@@ -3,7 +3,7 @@ from personalBlog.controllers.authController import  registerDef, loginDef, logo
 from personalBlog.controllers.postController import homeDef, articleDef
 from flask_login import login_required, logout_user
 from personalBlog.controllers.authController import  registerDef, loginDef
-from personalBlog.controllers.postController import homeDef, articleDef, editDef, editarticleDef, deletearticleDef
+from personalBlog.controllers.postController import homeDef, articleDef, editDef, editarticleDef, deletearticleDef, articleViewDef
 auth = Blueprint('auth', __name__, template_folder='templates/auth')
 post = Blueprint('post', __name__, template_folder='templates/post')
 
@@ -39,3 +39,7 @@ def editarticle(id):
 @post.route('/deletearticle/<int:id>', methods=['POST', 'GET'])
 def deletearticle(id):
     return deletearticleDef(id)
+
+@post.route('/articleview/<int:id>', methods=['POST', 'GET'])
+def articleview(id):
+    return articleViewDef(id)

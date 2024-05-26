@@ -55,3 +55,7 @@ def deletearticleDef(id):
     db.session.query(Post).filter(Post.post_id == id).delete()
     db.session.commit()
     return redirect(url_for('post.home'))
+
+def articleViewDef(id):
+    post = Post.query.filter_by(post_id=id).first()
+    return render_template('post/ArticleViewPage.html',post=post)
