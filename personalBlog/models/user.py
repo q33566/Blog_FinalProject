@@ -5,9 +5,9 @@ from flask_login import UserMixin
 
 class User(UserMixin, db.Model):
     __tablename__  = 'USER_INFO'
-    user_id: Mapped[int] = mapped_column(primary_key=True, nullable=True)
-    email: Mapped[str] = mapped_column(String(30), nullable=True)
-    password: Mapped[str] = mapped_column(String(30), nullable=True)
+    user_id: Mapped[int] = mapped_column(primary_key=True, nullable=False)
+    email: Mapped[str] = mapped_column(String(30), nullable=False)
+    password: Mapped[str] = mapped_column(String(30), nullable=False)
     
     def __init__(self, user_id, email, password):
         """初始化"""

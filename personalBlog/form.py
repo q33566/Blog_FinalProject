@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
 from wtforms import ValidationError
 from personalBlog.models.user import User
@@ -26,3 +27,9 @@ class RegistrationForm(FlaskForm):
 class LoginForm(FlaskForm):
     user_id = StringField('ID', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
+
+class AboutForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    about_me = TextAreaField('Introduction', validators=[DataRequired()])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    email = StringField('Email', validators=[DataRequired(), Email()])
