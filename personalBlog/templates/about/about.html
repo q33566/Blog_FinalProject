@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}About Page{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href="static/css/AboutPage.css" />
+{% endblock head %}
+{% block body %}
+    <h1>About the Author</h1>
+    <img src="{{ url_for('static', filename=image_url) }}   " alt="Profile picture" width="200" height="200">
+    <div>{{test}}</div>
+    /uploads/Default_Generate_an_image_of_a_grand_castle_in_a_fantastical_m_0.jpg
+    <h2 class="title">{{name}}</h2>
+
+    <div class="self_introduce">
+        <p>{{introduction}}</p>
+    </div>
+
+    <h3>Connect with me:</h3>
+    <div class="social_media">
+        email:{{email}}
+    </div>
+    <a href="{{ url_for('about.editAboutGet') }}">
+        <span class="editButton">Edit</span>
+    </a>
+
+    <script src="static/js/AboutPage.js"></script>
+{% endblock body %}

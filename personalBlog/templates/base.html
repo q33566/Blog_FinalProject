@@ -16,7 +16,7 @@
                 <ul class="navbar-nav ml-auto text-center">
                     <li class="nav-item"><a class="nav-link" href="{{url_for('post.article')}}">發表文章</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('post.edit')}}">編輯文章</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url_for('about')}}">關於</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('about.about')}}">關於</a></li>
                     {% if current_user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">登出</a></li>
                     {% else %}

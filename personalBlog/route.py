@@ -1,11 +1,23 @@
 from flask import Blueprint
-from personalBlog.controllers.authController import  registerDef, loginDef, logoutDef
-from personalBlog.controllers.postController import homeDef, articleDef
 from flask_login import login_required, logout_user
-from personalBlog.controllers.authController import  registerDef, loginDef
+from personalBlog.controllers.authController import  registerDef, loginDef, logoutDef
 from personalBlog.controllers.postController import homeDef, articleDef, editDef, editarticleDef, deletearticleDef, articleViewDef, tagViewDef
+from personalBlog.controllers.aboutController import aboutDef, editAboutGetDef, editAboutPostDef
 auth = Blueprint('auth', __name__, template_folder='templates/auth')
 post = Blueprint('post', __name__, template_folder='templates/post')
+aboutBp = Blueprint('about', __name__, template_folder='templates/about')
+
+@aboutBp.route('/about', methods=['GET'])
+def about():
+    return aboutDef()
+
+@aboutBp.route('/editAbout', methods=['GET'])
+def editAboutGet():
+    return editAboutGetDef()
+
+@aboutBp.route('/editAbout', methods=['POST'])
+def editAboutPost():
+    return editAboutPostDef()
 
 @auth.route('/register', methods=['POST', 'GET'])
 def register():

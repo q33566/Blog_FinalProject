@@ -5,12 +5,18 @@ from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.config['UPLOAD_FOLDER'] = '/personalBlog/static/image'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
 
 from personalBlog.route import auth
 app.register_blueprint(auth, url_prefix='/auth')
 
 from personalBlog.route import post
 app.register_blueprint(post, url_prefix='/post')
+
+from personalBlog.route import aboutBp
+app.register_blueprint(aboutBp, url_prefix='')
 
 from . import db
 db.init_db(app)
@@ -34,9 +40,3 @@ login_manager.init_app(app)
 #     db.session.add(new_user)
 #     db.session.commit()
 #     return None
-
-
-
-@app.route('/about', methods=['POST', 'GET'])
-def about():
-    return render_template('AboutPage.html')
