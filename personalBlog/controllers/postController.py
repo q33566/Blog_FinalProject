@@ -1,8 +1,8 @@
 from flask import redirect,url_for,render_template,request,session,flash, Blueprint
-from personalBlog.models.post import Post
+from personalBlog.models.post import Post, Comment
 import datetime
 from personalBlog.db import db
-
+from flask_login import current_user
 
 def homeDef():
     if request.method == 'POST':
@@ -57,5 +57,15 @@ def deletearticleDef(id):
     return redirect(url_for('post.home'))
 
 def articleViewDef(id):
+    if request.method == 'POST':
+        post_id = id
+        user_id = current_user.user_id
+        comment = request.form['comment']
+        time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        new_comment = Comment(post_id=post_id, comment=comment, time=time)
+        db.session.add(new_comment)
+        db.session.commit()
+        return redirect(url_for('post.articleview', id=post_id))
     post = Post.query.filter_by(post_id=id).first()
-    return render_template('post/ArticleViewPage.html',post=post)
+    comments = Comment.query.filter_by(post_id=id).all()
+    return render_template('post/ArticleViewPage.html',post=post,comments=comments)

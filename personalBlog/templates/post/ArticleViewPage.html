@@ -21,12 +21,15 @@
                         <section>
                             <p style="margin:10px; padding-left:100px">{{ post.content }}</p>
                             <h2 style="padding-left:100px;">留言</h2>
-                            <form action="ArticlePage.html" method="post">
+                            <ul style="padding-left:100px;">
+                                {% for comment in comments %}
+                                <li>{{ comment.user_id }}：{{ comment.comment }}</li>
+                                {% endfor %}
+                            </ul>
+                            <form action="{{url_for('post.articleview',id=post.post_id)}}" method="post">
                                 <ul style="padding-left:100px;" class="actions">
-
-                                    <li><label for="\n"></li>
                                     <li>
-                                        <textarea id="content" name="content"
+                                        <textarea id="comment" name="comment"
                                             style="width: 1140px;height: 200px; resize: none; padding-left:100px;"
                                             required></textarea>
                                     </li>
