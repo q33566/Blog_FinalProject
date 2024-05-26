@@ -22,10 +22,9 @@
         <!-- Main Tab -->
         <section id="index_main_tab" class="Main_tab">
             <ul class="Main_tab_index">
-                <li id="recommandedArticle">推薦</li>
-                <li id="tagArticle">標籤</li>
-                <li id="newestArticle">最新</li>
-                <li id="hotArticle">熱門</li>
+                <li id="recommandedArticle"><a href="{{url_for('post.home',style='recommanded_view')}}">推薦</a></li>
+                <li id="newestArticle"><a href="{{url_for('post.home',style='new_view')}}">最新</a></li>
+                <li id="hotArticle"><a href="{{url_for('post.home',style='hot_view')}}">熱門</a></li>
             </ul>
         </section>
         <!-- Content -->
@@ -34,7 +33,18 @@
                 <div class="row aln-center">
                     <!-- recommandedArticleList -->
                     <section id="recommandedArticleList" >
+                        {% if style=='recommanded_view' %}
                         <th>推薦文章列表</th>
+                        {% endif %}
+                        {% if style=='tag_view' %}
+                        <th>標籤文章列表</th>
+                        {% endif %}
+                        {% if style=='new_view' %}
+                        <th>最新文章列表</th>
+                        {% endif %}
+                        {% if style=='hot_view' %}
+                        <th>熱門文章列表</th>
+                        {% endif %}
                         {% for post in posts %}
                         <div class="col-4 col-6-medium col-12-small">
                             <section>
@@ -42,6 +52,10 @@
                                     <a href="{{url_for('post.articleview',id=post.post_id)}}"><h2>{{ post.title }}</h2></a>
                                 </header>
                                 <p>{{ post.intro }}</p>
+                                {% set tag_list = post.tag.split(',') %}
+                                {% for tag in tag_list %}
+                                <a href="{{url_for('post.tagview',tag=tag)}}">{{ tag }}</a>
+                                {% endfor %}
                             </section>
                         </div>
                         {% endfor %}

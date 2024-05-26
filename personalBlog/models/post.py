@@ -10,6 +10,7 @@ class Post(db.Model):
     content: Mapped[str] = mapped_column(String(30), nullable=True)
     intro: Mapped[str] = mapped_column(String(30), nullable=True)
     time: Mapped[str] = mapped_column(String(30), nullable=True)
+    view_count: Mapped[int] = mapped_column(String(30), nullable=True)
 
 class Comment(db.Model):
     __tablename__ = 'COMMENT'
