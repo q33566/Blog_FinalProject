@@ -10,3 +10,12 @@ class Post(db.Model):
     content: Mapped[str] = mapped_column(String(30), nullable=True)
     intro: Mapped[str] = mapped_column(String(30), nullable=True)
     time: Mapped[str] = mapped_column(String(30), nullable=True)
+    view_count: Mapped[int] = mapped_column(String(30), nullable=True)
+
+class Comment(db.Model):
+    __tablename__ = 'COMMENT'
+    comment_id: Mapped[int] = mapped_column(primary_key=True, nullable=True, autoincrement=True)
+    post_id: Mapped[int] = mapped_column(String(30), nullable=True)
+    user_id: Mapped[int] = mapped_column(String(30), nullable=True)
+    comment: Mapped[str] = mapped_column(String(30), nullable=True)
+    time: Mapped[str] = mapped_column(String(30), nullable=True)
