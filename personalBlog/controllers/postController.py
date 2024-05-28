@@ -36,6 +36,8 @@ def articleDef():
     return render_template('post/ArticlePage.html')
 
 def editDef():
+    if current_user.user_id != "coffee":
+        return redirect(url_for('post.home',style='recommanded_view'))
     if request.method == 'POST':
         posts=Post.query.all()
         return render_template('post/EditPage.html',posts=posts)
@@ -44,6 +46,8 @@ def editDef():
 
 
 def editarticleDef(id):
+    if current_user.user_id != "coffee":
+        return redirect(url_for('post.home',style='recommanded_view'))
     if request.method == 'POST':
         post_id = request.form['post_id']
         db.session.query(Post).filter(Post.post_id == post_id).delete()
@@ -63,6 +67,8 @@ def editarticleDef(id):
 
 
 def deletearticleDef(id):
+    if current_user.user_id != "coffee":
+        return redirect(url_for('post.home',style='recommanded_view'))
     db.session.query(Post).filter(Post.post_id == id).delete()
     db.session.commit()
     return redirect(url_for('post.home',style='recommanded_view'))

@@ -17,9 +17,11 @@
     <div class="social_media">
         email:{{email}}
     </div>
+    {% if current_user.user_id == "coffee" %}
     <a href="{{ url_for('about.editAboutGet') }}">
         <span class="editButton">Edit</span>
     </a>
+    {% endif %}
 
     <script src="static/js/AboutPage.js"></script>
 {% endblock body %}

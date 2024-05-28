@@ -12,10 +12,14 @@ def aboutDef():
     return render_template('about/about.html', image_url = '/uploads/'+about.filename , introduction = about.introduction, name = about.name, email = about.email)
 
 def editAboutGetDef():
+    if current_user.user_id != "coffee":
+        redirect(url_for('about.about'))
     form = AboutForm()
     return render_template('about/editAbout.html', form = form)
 
 def editAboutPostDef():
+    if current_user.user_id != "coffee":
+        redirect(url_for('about.about'))
     form = AboutForm()
     about = About.query.first()
     if form.validate_on_submit():
