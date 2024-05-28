@@ -8,6 +8,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['UPLOAD_FOLDER'] = '/personalBlog/static/image'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+@app.route('/')
+def home():
+    return redirect(url_for('post.home',style='recommanded_view'))
 
 from personalBlog.route import auth
 app.register_blueprint(auth, url_prefix='/auth')
