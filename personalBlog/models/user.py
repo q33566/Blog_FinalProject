@@ -15,7 +15,7 @@ class User(UserMixin, db.Model):
         self.email = email
         self.password = password
     def get_id(self):
-        return self.user_id
+        return str(self.user_id)
     
     def check_password(self, password):
         """檢查輸入是否與密碼相符"""
