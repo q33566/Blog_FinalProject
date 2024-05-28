@@ -21,7 +21,7 @@ app.register_blueprint(post, url_prefix='/post')
 from personalBlog.route import aboutBp
 app.register_blueprint(aboutBp, url_prefix='')
 
-from . import db
+from personalBlog import db
 db.init_db(app)
 
 from personalBlog.controllers.authController import login_manager
