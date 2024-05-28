@@ -6,7 +6,7 @@ from flask_login import current_user
 from personalBlog.form import AboutForm
 from werkzeug.utils import secure_filename
 import os
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'personalBlog', 'static', 'uploads')
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static', 'uploads')
 def aboutDef():
     about = About.query.first()
     return render_template('about/about.html', image_url = '/uploads/'+about.filename , introduction = about.introduction, name = about.name, email = about.email)
