@@ -1,7 +1,4 @@
 from flask import Flask,redirect,url_for,render_template,request,session,flash
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String
-from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -27,7 +24,8 @@ db.init_db(app)
 from personalBlog.controllers.authController import login_manager
 login_manager.init_app(app)
 
-
+if __name__ == '__main__':
+    app.run(port=6002)
 
 
 
