@@ -3,7 +3,14 @@
 {% block head %}
 {% endblock head %}
 {% block body %}
-    <h1>About the Author</h1>
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+        <div class="flashes">
+            <div class="flash">{{ message[0] }}</div>
+        </div>
+    {% endif %}
+    {% endwith %}
+    <h1>關於筆者</h1>
     <img src="{{ url_for('static', filename=image_url) }}   " alt="Profile picture" width="200" height="200">
     <div>{{test}}</div>
     <h2 class="title">{{name}}</h2>
@@ -12,7 +19,7 @@
         <p>{{introduction}}</p>
     </div>
 
-    <h3>Connect with me:</h3>
+    <h3>聯絡筆者:</h3>
     <div class="social_media">
         email:{{email}}
     </div>

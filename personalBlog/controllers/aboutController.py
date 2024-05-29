@@ -53,6 +53,6 @@ def editAboutPostDef():
             db.session.commit()
         db.session.commit()
 
-        flash('Profile updated successfully', 'success')
+        flash('自我介紹頁面更新成功', 'success')
         return redirect(url_for('about.about', image_url = '/uploads/'+about.filename, introduction = about.introduction, name = about.name, email = about.email))
     return render_template('about/editAbout.html', form = form)
