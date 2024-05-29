@@ -16,7 +16,8 @@
                     <div class="col-12">
                         <header>
                             <h1 style="margin:10px; padding-left:100px">{{ post.title }}</h1>
-                        <!-- Main Content -->
+                        
+                        {% if current_user.is_authenticated %}
                         <section>
                             <p style="margin:10px; padding-left:100px">{{ post.content }}</p>
                             <h2 style="padding-left:100px;">留言</h2>
@@ -32,11 +33,13 @@
                                             style="width: 1140px;height: 200px; resize: none; padding-left:100px;"
                                             required></textarea>
                                     </li>
-
                                     <button type="submit" class="submitbutton">發表</button>
                                 </ul>
                             </form>
                         </section>
+                        {% else %}
+                        <p style="margin:10px; padding-left:100px">登入以留言</p>
+                        {% endif %}
 
                     </div>
                 </div>
