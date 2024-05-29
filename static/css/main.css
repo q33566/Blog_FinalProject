@@ -255,3 +255,6 @@ li {
   height: 200px;
   resize: none;
 }
+.textarea.no-resize {
+  resize: none;
+}

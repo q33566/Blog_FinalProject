@@ -30,6 +30,6 @@ class LoginForm(FlaskForm):
 
 class AboutForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    about_me = TextAreaField('Introduction', validators=[DataRequired()])
+    about_me = TextAreaField('Introduction', validators=[DataRequired()],render_kw={"class": "no-resize"})
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     email = StringField('Email', validators=[DataRequired(), Email()])
