@@ -11,13 +11,15 @@
                 <!-- Main Content -->
                 <section>
                     <p>{{ post.content }}</p>
-                {% if current_user.is_authenticated %}
+
+    
                     <h2>留言</h2>
                     <ul>
                         {% for comment in comments %}
                         <li>{{ comment.user_id }}：{{ comment.comment }}</li>
                         {% endfor %}
                     </ul>
+                    {% if current_user.is_authenticated %}
                     <form action="{{url_for('post.articleview',id=post.post_id)}}" method="post">
                         <ulclass="actions">
                             <li>
@@ -27,10 +29,10 @@
                             <button type="submit" class="submitbutton">發表</button>
                             </ul>
                     </form>
+                    {% else %}
+                    <p style="margin:10px; padding-left:100px">登入以留言</p>
+                    {% endif %}
                 </section>
-                {% else %}
-                <p style="margin:10px; padding-left:100px">登入以留言</p>
-                {% endif %}
             </header>
         </div>
     </section>
