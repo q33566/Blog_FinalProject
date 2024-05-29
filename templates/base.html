@@ -16,6 +16,11 @@
             </a>
             <div class="navbar-collapse">
                 <ul class="navbar-nav ml-auto text-center">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <p>用戶ID: {{ current_user.user_id }}</p>
+                    </li>
+                    {% endif %}
                     {% if current_user.user_id == "coffee" %}
                     <li class="nav-item"><a class="nav-link" href="{{url_for('post.article')}}">發表文章</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('post.edit')}}">編輯文章</a></li>
@@ -33,10 +38,5 @@
 {% block body %}
 
 {% endblock body %}
-{% if current_user.is_authenticated %}
-<div class="footer">
-    <p>目前登入的用戶ID: {{ current_user.user_id }}</p>
-</div>
-{% endif %}
 </body>
 </html>
