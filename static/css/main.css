@@ -46,6 +46,12 @@ li {
 .editButton:hover {
   background-color: gray;
 }
+  
+.enroll {
+  display: flex;
+  color: #efd73a;
+  text-decoration: none;
+}
 
 /* 以下是navbar */
 .navbar {

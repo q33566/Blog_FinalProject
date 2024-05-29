@@ -3,22 +3,33 @@
 {% block head %}
 {% endblock head %}
 {% block body %}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <script>
-        alert("{{ messages[0] | safe }}");
-    </script>
-    {% endif %}
-    {% endwith %}
-    <h1>Login</h1>
-    <form novalidate method='post'>
-        {{ form.hidden_tag() }}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<script>
+    alert("{{ messages[0] | safe }}");
+</script>
+{% endif %}
+{% endwith %}
+<h1>Login</h1>
+<form novalidate method='post'>
+    <div>
+        {{ form.hidden_tag() }}</div>
+    <div>
         <label for="user_id">User ID:</label>
-        {{ form.user_id(id='user_id') }}    
+    </div>
+    <div>
+        {{ form.user_id(id='user_id') }}
+    </div>
+    <div>
         <label for="password">Password:</label>
+    </div>
+    <div>
         {{ form.password(id='password') }}
+    </div>
+    <div>
         <button type="submit">Login</button>
         <a class="enroll" href="{{url_for('auth.register')}}">註冊</a>
-    </form>
-    <script src="static/js/LoginPage.js"></script>
+    </div>
+</form>
+<script src="static/js/LoginPage.js"></script>
 {% endblock body %}
