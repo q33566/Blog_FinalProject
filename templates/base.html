@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     {% block head %}
     {% endblock head %}
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
 </head>
+
 <body>
     {% if current_user.is_authenticated %}
     {% endif %}
@@ -22,19 +24,26 @@
                     {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{{url_for('about.about')}}">關於</a></li>
                     {% if current_user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">登出</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">登出</a></li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">登入</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">登入</a></li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-{% block body %}
 
-{% endblock body %}
-<div class="footer">
-    <p>目前登入的用戶ID: {{ current_user.user_id }}</p>
-</div>
+    <!-- space -->
+    <section id='space'>
+        <br></br>
+        <br></br>
+    </section>
+    {% block body %}
+
+    {% endblock body %}
+    <div class="footer">
+        <p>目前登入的用戶ID: {{ current_user.user_id }}</p>
+    </div>
 </body>
+
 </html>

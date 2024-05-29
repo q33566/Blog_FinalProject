@@ -3,40 +3,31 @@
 {% block head %}
 {% endblock head %}
 {% block body %}
-    <div>
-        <!-- space -->
-        <section id='space'>
-            <br></br>
-            <br></br>
-        </section>
-        <!-- Content -->
-        <section id="content">
-            <div class="container">
-                <div class="row aln-center">
-                    <!-- recommandedArticleList -->
-                    <section id="recommandedArticleList" >
-                        <th><h1>文章列表</h1></th>
-                        {% for post in posts %}
-                        <div class="col-4 col-6-medium col-12-small">
-                            <section>
-                                <header>
-                                    <h2>{{ post.title }}</h2>
-                                    <tr>
-                                    <form action="{{url_for('post.editarticle',id=post.post_id)}}" method="get">
-                                        <input type="hidden" value="{{ post.post_id }}">
-                                        <button type="submit" id="{{ post.post_id }}" class="submitbutton">編輯</button>
-                                    </form></tr>
-                                    <tr><form action="{{url_for('post.deletearticle',id=post.post_id)}}" method="get">
-                                        <button class="submitbutton" type="submit" >刪除</button>
-                                    </form></tr>
-                                </header>
-                            </section>
-                        </div>
-                        {% endfor %}
-                    </section>
-                    <!-- tagArticleList -->
-                </div>
+<div>
+    <!-- Content -->
+    <section class="content">
+        <div class="container">
+            <div class="row aln-center">
+                <!-- ArticleList -->
+                <section class="ArticleList">
+                    <th>
+                        <h1>文章列表</h1>
+                    </th>
+                    {% for post in posts %}
+                    <div class="col-4 col-6-medium col-12-small">
+                        <section>
+                            <header>
+                                <h2>{{ post.title }}</h2>
+                                <a href="{{url_for('post.editarticle',id=post.post_id)}}" class="header">編輯</a>
+                                <a href="{{url_for('post.deletearticle',id=post.post_id)}}" class="header">刪除</a>
+                            </header>
+                        </section>
+                    </div>
+                    {% endfor %}
+                </section>
+                <!-- tagArticleList -->
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 {% endblock body %}

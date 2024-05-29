@@ -3,44 +3,33 @@
 {% block head %}
 {% endblock head %}
 {% block body %}
-    <div>
-        <!-- space -->
-        <section id='space'>
-            <br></br>
-            <br></br>
-        </section>
-        <!-- Content -->
-        <section id="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <header>
-                            <h1 style="margin:10px; padding-left:100px">{{ post.title }}</h1>
-                        <!-- Main Content -->
-                        <section>
-                            <p style="margin:10px; padding-left:100px">{{ post.content }}</p>
-                            <h2 style="padding-left:100px;">留言</h2>
-                            <ul style="padding-left:100px;">
-                                {% for comment in comments %}
-                                <li>{{ comment.user_id }}：{{ comment.comment }}</li>
-                                {% endfor %}
+<div>
+    <!-- Content -->
+    <section class="article_content">
+        <div class="container">
+            <header>
+                <h1>{{ post.title }}</h1>
+                <!-- Main Content -->
+                <section>
+                    <p>{{ post.content }}</p>
+                    <h2>留言</h2>
+                    <ul>
+                        {% for comment in comments %}
+                        <li>{{ comment.user_id }}：{{ comment.comment }}</li>
+                        {% endfor %}
+                    </ul>
+                    <form action="{{url_for('post.articleview',id=post.post_id)}}" method="post">
+                        <ulclass="actions">
+                            <li>
+                                <textarea id="comment" name="comment" required></textarea>
+                            </li>
+
+                            <button type="submit" class="submitbutton">發表</button>
                             </ul>
-                            <form action="{{url_for('post.articleview',id=post.post_id)}}" method="post">
-                                <ul style="padding-left:100px;" class="actions">
-                                    <li>
-                                        <textarea id="comment" name="comment"
-                                            style="width: 1140px;height: 200px; resize: none; padding-left:100px;"
-                                            required></textarea>
-                                    </li>
-
-                                    <button type="submit" class="submitbutton">發表</button>
-                                </ul>
-                            </form>
-                        </section>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+                    </form>
+                </section>
+            </header>
+        </div>
+    </section>
+</div>
 {% endblock body %}
