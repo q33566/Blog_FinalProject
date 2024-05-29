@@ -18,13 +18,19 @@
         <label for="user_id">User ID:</label>
     </div>
     <div>
-        {{ form.user_id(id='user_id') }}
+        {{ form.user_id(id='user_id') }}<br>
+        {% for error in form.user_id.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+        {% endfor %}
     </div>
     <div>
         <label for="password">Password:</label>
     </div>
     <div>
-        {{ form.password(id='password') }}
+        {{ form.password(id='password') }}<br>
+        {% for error in form.password.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+        {% endfor %}
     </div>
     <div>
         <button type="submit">Login</button>

@@ -28,19 +28,9 @@ def editAboutPostDef():
         name = form.name.data
         introduction = form.about_me.data
         email = form.email.data
-        filename = None
-        if form.picture.data is not None:
-            filename = secure_filename(form.picture.data.filename)
-        if name is None or introduction is None or email is None or filename is None:
-            flash('請填寫所有欄位', 'error')
-            return redirect(url_for('about.editAboutGet', form = form))
+        filename = secure_filename(form.picture.data.filename)
         # Check if a file was uploaded
         if form.picture.data:
-            # Check if the file is a picture
-            if not form.picture.data.filename.lower().endswith(('.png', '.jpg', '.jpeg')):
-                flash('File must be a picture', 'error')
-                return redirect('about/editAbout.html', form = form, message = '檔案不符合')
-            
             # Save the picture
             if not os.path.exists(UPLOAD_FOLDER):
                 os.makedirs(UPLOAD_FOLDER)
@@ -58,16 +48,11 @@ def editAboutPostDef():
             # The About table is not empty, so update the existing row
             about.name = name
             about.introduction = introduction
-            if filename is not None:
-                about.filename = filename
+            about.filename = filename
             about.email = email
             db.session.commit()
         db.session.commit()
 
         flash('Profile updated successfully', 'success')
         return redirect(url_for('about.about', image_url = '/uploads/'+about.filename, introduction = about.introduction, name = about.name, email = about.email))
-
-
-    # If the form data is not valid, redirect back to the editAbout page
-    flash('欄位不能為空，相片或著格式不符', 'error')
-    return redirect(url_for('about.editAboutGet'))
+    return render_template('about/editAbout.html', form = form)

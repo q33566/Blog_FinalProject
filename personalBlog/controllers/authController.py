@@ -35,16 +35,15 @@ def loginDef():
         password = form.password.data
         user = User.query.get(user_id)
         if user is None:
-            flash('ID不存在','ID_does_not_exist')
+            flash('ID不存在或密碼錯誤','ID_does_not_exist')
             return redirect(url_for('auth.login'))
-
-        if not user.check_password(password):  # assuming your User model has a check_password method
-            flash('密碼錯誤','wrong_password')
+        elif not user.check_password(password):  # assuming your User model has a check_password method
+            flash('ID不存在或密碼錯誤','wrong_password')
             return redirect(url_for('auth.login'))
 
         login_user(user)
 
         flash('登入成功','login_success')
         return redirect(url_for('post.home',style='recommanded_view'))  # redirect to the index page after successful login
-
+        
     return render_template('auth/login.html', form = form)  # render the login formfrom flask import request, flash, session

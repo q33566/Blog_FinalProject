@@ -25,11 +25,21 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('email已經存在，請重新輸入')
         
 class LoginForm(FlaskForm):
-    user_id = StringField('ID', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    user_id = StringField('ID', validators=[DataRequired(message='請輸入ID')])
+    password = PasswordField('Password', validators=[DataRequired(message='請輸入密碼')])
+    
+    # def validate_user_id(self, field):
+    #     user = User.query.filter_by(user_id=field.data).first()
+    #     if not user:
+    #         raise ValidationError('ID不存在或密碼錯誤')
+
+    # def validate_password(self, field):
+    #     user = User.query.filter_by(user_id=self.user_id.data).first()
+    #     if not user or not user.password == field.data:  # 使用 check_password_hash 函數檢查密碼  
+    #         raise ValidationError('ID不存在或密碼錯誤')
 
 class AboutForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    about_me = TextAreaField('Introduction', validators=[DataRequired()],render_kw={"class": "no-resize"})
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    name = StringField('Name', validators=[DataRequired(message='請輸入名字')])
+    about_me = TextAreaField('Introduction', validators=[DataRequired(message='請輸入自我介紹')],render_kw={"class": "no-resize"})
+    picture = FileField('Update Profile Picture', validators=[DataRequired(message='請上傳jpg或png檔案'),FileAllowed(['jpg', 'png'],'只允許上傳 jpg 或 png 格式的圖片')])
+    email = StringField('Email', validators=[DataRequired('請輸入名字'), Email('email格式不符')])

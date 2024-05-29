@@ -9,9 +9,9 @@
             <header>
                 <h1>{{ post.title }}</h1>
                 <!-- Main Content -->
-                {% if current_user.is_authenticated %}
                 <section>
                     <p>{{ post.content }}</p>
+                {% if current_user.is_authenticated %}
                     <h2>留言</h2>
                     <ul>
                         {% for comment in comments %}
