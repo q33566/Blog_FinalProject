@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-{% block title %}{{ post.post_id }}{% endblock title %}
 {% block head %}
 {% endblock head %}
 {% block body %}
-<<<<<<< HEAD
 <div>
     <!-- Content -->
     <section class="article_content">
@@ -11,6 +9,7 @@
             <header>
                 <h1>{{ post.title }}</h1>
                 <!-- Main Content -->
+                {% if current_user.is_authenticated %}
                 <section>
                     <p>{{ post.content }}</p>
                     <h2>留言</h2>
@@ -29,53 +28,11 @@
                             </ul>
                     </form>
                 </section>
+                {% else %}
+                <p style="margin:10px; padding-left:100px">登入以留言</p>
+                {% endif %}
             </header>
         </div>
     </section>
 </div>
-=======
-    <div>
-        <!-- space -->
-        <section id='space'>
-            <br></br>
-            <br></br>
-        </section>
-        <!-- Content -->
-        <section id="content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <header>
-                            <h1 style="margin:10px; padding-left:100px">{{ post.title }}</h1>
-                        
-                        {% if current_user.is_authenticated %}
-                        <section>
-                            <p style="margin:10px; padding-left:100px">{{ post.content }}</p>
-                            <h2 style="padding-left:100px;">留言</h2>
-                            <ul style="padding-left:100px;">
-                                {% for comment in comments %}
-                                <li>{{ comment.user_id }}：{{ comment.comment }}</li>
-                                {% endfor %}
-                            </ul>
-                            <form action="{{url_for('post.articleview',id=post.post_id)}}" method="post">
-                                <ul style="padding-left:100px;" class="actions">
-                                    <li>
-                                        <textarea id="comment" name="comment"
-                                            style="width: 1140px;height: 200px; resize: none; padding-left:100px;"
-                                            required></textarea>
-                                    </li>
-                                    <button type="submit" class="submitbutton">發表</button>
-                                </ul>
-                            </form>
-                        </section>
-                        {% else %}
-                        <p style="margin:10px; padding-left:100px">登入以留言</p>
-                        {% endif %}
-
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
->>>>>>> e4d96e04f00193627b8845b83a1e0128054ce700
 {% endblock body %}
