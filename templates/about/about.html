@@ -5,9 +5,9 @@
 {% block body %}
     {% with message = get_flashed_messages() %}
     {% if message %}
-        <div class="flashes">
-            <div class="flash">{{ message[0] }}</div>
-        </div>
+    <script>
+        alert("{{ message[0] | safe }}");
+    </script>
     {% endif %}
     {% endwith %}
     <h1>關於筆者</h1>
