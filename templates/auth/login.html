@@ -5,11 +5,9 @@
 {% block body %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    {% for message in messages %}
     <script>
-        alert("{{ messages }}");
+        alert("{{ messages[0] | safe }}");
     </script>
-    {% endfor %}
     {% endif %}
     {% endwith %}
     <h1>Login</h1>
