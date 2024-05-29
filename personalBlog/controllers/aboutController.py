@@ -9,6 +9,8 @@ import os
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static', 'uploads')
 def aboutDef():
     about = About.query.first()
+    if about is None:
+        return render_template('about/about.html', image_url = '/uploads/default.jpg', introduction = '部落格擁有者沒有提供個人訊息', name = '無', email = 'no email')
     return render_template('about/about.html', image_url = '/uploads/'+about.filename , introduction = about.introduction, name = about.name, email = about.email)
 
 def editAboutGetDef():
