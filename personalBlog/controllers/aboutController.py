@@ -28,10 +28,12 @@ def editAboutPostDef():
         name = form.name.data
         introduction = form.about_me.data
         email = form.email.data
-        filename = secure_filename(form.picture.data.filename)
+        filename = None
+        if form.picture.data is not None:
+            filename = secure_filename(form.picture.data.filename)
         if name is None or introduction is None or email is None or filename is None:
-            flash('Please fill in all fields', 'error')
-            return redirect(url_for('about.editAboutGet', form = form, message = '請填寫所有欄位'))
+            flash('請填寫所有欄位', 'error')
+            return redirect(url_for('about.editAboutGet', form = form))
         # Check if a file was uploaded
         if form.picture.data:
             # Check if the file is a picture
@@ -49,7 +51,7 @@ def editAboutPostDef():
         # Save the changes to the database
         if about is None:
             # The About table is empty, so create a new row
-            about = About(name = name, introduction = introduction, filename = filename, email = about.email)
+            about = About(name = name, introduction = introduction, filename = filename, email = email)
             db.session.add(about)
             db.session.commit()
         else:
