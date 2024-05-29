@@ -46,8 +46,9 @@ li {
 .editButton:hover {
   background-color: gray;
 }
-  
+
 .enroll {
+  padding-top: 10px;
   display: flex;
   color: #efd73a;
   text-decoration: none;
