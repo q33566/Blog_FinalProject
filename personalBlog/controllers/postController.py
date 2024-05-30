@@ -90,6 +90,16 @@ def articleViewDef(id):
     db.session.commit()
     return render_template('post/ArticleViewPage.html',post=post,comments=comments)
 
+def tagListDef():
+    posts = Post.query.all()
+    tags = []
+    for post in posts:
+        tag = post.tag.split(',')
+        for t in tag:
+            if t not in tags:
+                tags.append(t)
+    return render_template('post/TagPage.html',tags=tags)
+
 def tagViewDef(tag):
     if request.method == 'POST':
         posts = Post.query.filter(Post.tag.like('%'+tag+'%')).all()

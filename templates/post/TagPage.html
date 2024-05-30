@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block head %}
+{% endblock head %}
+{% block body %}
+<div>
+    <!-- Content -->
+    <section class="content">
+        <div class="container">
+            <div class="row aln-center">
+                <!-- recommandedArticleList -->
+                <section class="ArticleList">
+                    <div class="tag_section">
+                        <section>
+                            <div class="tag_list">
+                                <ul>
+                                    {% for tag in tags %}
+                                    {% if loop.index % 4 == 0 %}</ul><ul>
+                                    {% endif %}
+                                    <a class="tags" href="{{url_for('post.tagview',tag=tag)}}">{{ tag }}</a>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <!-- tagArticleList -->
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock body %}

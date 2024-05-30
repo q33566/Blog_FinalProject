@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_login import login_required, logout_user
 from personalBlog.controllers.authController import  registerDef, loginDef, logoutDef
-from personalBlog.controllers.postController import homeDef, articleDef, editDef, editarticleDef, deletearticleDef, articleViewDef, tagViewDef
+from personalBlog.controllers.postController import homeDef, articleDef, editDef, editarticleDef, deletearticleDef, articleViewDef, tagViewDef, tagListDef
 from personalBlog.controllers.aboutController import aboutDef, editAboutGetDef, editAboutPostDef
 auth = Blueprint('auth', __name__, template_folder='templates/auth')
 post = Blueprint('post', __name__, template_folder='templates/post')
@@ -55,6 +55,10 @@ def deletearticle(id):
 @post.route('/articleview/<int:id>', methods=['POST', 'GET'])
 def articleview(id):
     return articleViewDef(id)
+
+@post.route('/taglist', methods=['POST', 'GET'])
+def tag():
+    return tagListDef()
 
 @post.route('/tagview/<string:tag>', methods=['POST', 'GET'])
 def tagview(tag):
