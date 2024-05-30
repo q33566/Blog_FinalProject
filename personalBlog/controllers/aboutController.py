@@ -14,9 +14,14 @@ def aboutDef():
     return render_template('about/about.html', image_url = '/uploads/'+about.filename , introduction = about.introduction, name = about.name, email = about.email)
 
 def editAboutGetDef():
+    about = About.query.first()
+    form = AboutForm()
+    if about is not None:
+        form.name.data = about.name
+        form.about_me.data = about.introduction
+        form.email.data = about.email
     if current_user.user_id != "coffee":
         redirect(url_for('about.about'))
-    form = AboutForm()
     return render_template('about/editAbout.html', form = form)
 
 def editAboutPostDef():
@@ -28,7 +33,8 @@ def editAboutPostDef():
         name = form.name.data
         introduction = form.about_me.data
         email = form.email.data
-        filename = secure_filename(form.picture.data.filename)
+        if form.picture.data:
+            filename = secure_filename(form.picture.data.filename)
         # Check if a file was uploaded
         if form.picture.data:
             # Save the picture
@@ -48,7 +54,8 @@ def editAboutPostDef():
             # The About table is not empty, so update the existing row
             about.name = name
             about.introduction = introduction
-            about.filename = filename
+            if form.picture.data:
+                about.filename = filename
             about.email = email
             db.session.commit()
         db.session.commit()

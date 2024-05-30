@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
 class AboutForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(message='請輸入名字')])
     about_me = TextAreaField('Introduction', validators=[DataRequired(message='請輸入自我介紹')],render_kw={"class": "no-resize"})
-    picture = FileField('Update Profile Picture', validators=[DataRequired(message='請上傳jpg或png檔案'),FileAllowed(['jpg', 'png'],'只允許上傳 jpg 或 png 格式的圖片')])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'],'只允許上傳 jpg 或 png 格式的圖片')])
     email = StringField('Email', validators=[DataRequired('請輸入名字'), Email('email格式不符')])
 
 class ArticleForm(FlaskForm):
