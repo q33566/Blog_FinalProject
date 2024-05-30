@@ -16,25 +16,49 @@
                             <header>
                                 <h2>發表文章</h2>
                             </header>
-                            <form action="{{url_for('post.article')}}" method="post" class="nice-form-group">
-                                <ul class="actions">
-                                    <li><label for="title">標題:</label></li>
-                                    <input type="text" id="title" name="title" style="width: 840px;" required>
-                                </ul>
-                                <ul class="actions">
-                                    <li><label for="tag">分類:</label></li>
-                                    <input type="text" id="tag" name="tag" style="width: 840px;" required>
-                                </ul>
-                                <ul class="actions">
-                                    <li><label for="intro">簡介:</label></li>
-                                    <input type="text" id="intro" name="intro" style="width: 840px;" required>
-                                </ul>
-                                <ul class="actions">
-                                    <li><label for="content">內容:</label></li>
-                                    <li><textarea id="content" name="content"
-                                            style="width: 840px;height: 200px; resize: none;" required></textarea></li>
-                                    <button type="submit" class="submitbutton">發表</button>
-                                </ul>
+                            <form novalidate method='post'>
+                                <div>
+                                    {{ form.hidden_tag() }}
+                                </div>
+                                <div>
+                                    <label for="title">標題:</label>
+                                </div>
+                                <div>
+                                    {{ form.title(id='title') }}<br>
+                                    {% for error in form.title.errors %}
+                                            <span style="color: red;">{{ error }}</span><br>
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    <label for="tag">分類:</label>
+                                </div>
+                                <div>
+                                    {{ form.tag(id='tag') }}<br>
+                                    {% for error in form.tag.errors %}
+                                            <span style="color: red;">{{ error }}</span><br>
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    <label for="intro">簡介:</label>
+                                </div>
+                                <div>
+                                    {{ form.intro(id='intro') }}<br>
+                                    {% for error in form.intro.errors %}
+                                            <span style="color: red;">{{ error }}</span><br>
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    <label for="content">內容:</label>
+                                </div>
+                                <div>
+                                    {{ form.content(id='content') }}<br>
+                                    {% for error in form.content.errors %}
+                                            <span style="color: red;">{{ error }}</span><br>
+                                    {% endfor %}
+                                </div>
+                                <div>
+                                    <button type="submit">發表</button>
+                                </div>
                             </form>
                         </section>
 

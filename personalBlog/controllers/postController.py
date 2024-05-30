@@ -1,6 +1,7 @@
 from flask import redirect,url_for,render_template,request,session,flash, Blueprint
 from personalBlog.models.post import Post, Comment
 from personalBlog.models.user import User
+from personalBlog.form import ArticleForm
 import datetime
 from personalBlog.db import db
 from flask_login import current_user
@@ -22,18 +23,19 @@ def homeDef(style):
 
 
 def articleDef():
-    if request.method == 'POST':
-        title = request.form['title']  
-        tag = request.form['tag']
-        intro = request.form['intro']
-        content = request.form['content']
+    form = ArticleForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        tag = form.tag.data
+        intro = form.intro.data
+        content = form.content.data
         time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         view_count = 0
         new_post = Post(title=title, tag=tag, intro=intro, content=content, time=time, view_count=view_count)
         db.session.add(new_post)
         db.session.commit()
         return redirect(url_for('post.home',style='recommanded_view'))
-    return render_template('post/ArticlePage.html')
+    return render_template('post/ArticlePage.html', form=form)
 
 def editDef():
     if current_user.user_id != "coffee":

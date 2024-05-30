@@ -23,11 +23,11 @@ class RegistrationForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('email已經存在，請重新輸入')
-        
+
 class LoginForm(FlaskForm):
     user_id = StringField('ID', validators=[DataRequired(message='請輸入ID')])
     password = PasswordField('Password', validators=[DataRequired(message='請輸入密碼')])
-    
+
     # def validate_user_id(self, field):
     #     user = User.query.filter_by(user_id=field.data).first()
     #     if not user:
@@ -43,3 +43,9 @@ class AboutForm(FlaskForm):
     about_me = TextAreaField('Introduction', validators=[DataRequired(message='請輸入自我介紹')],render_kw={"class": "no-resize"})
     picture = FileField('Update Profile Picture', validators=[DataRequired(message='請上傳jpg或png檔案'),FileAllowed(['jpg', 'png'],'只允許上傳 jpg 或 png 格式的圖片')])
     email = StringField('Email', validators=[DataRequired('請輸入名字'), Email('email格式不符')])
+
+class ArticleForm(FlaskForm):
+    title = StringField('標題', validators=[DataRequired(message='欄位不能空白')])
+    tag = StringField('分類', validators=[DataRequired(message='欄位不能空白')])
+    intro = StringField('簡介', validators=[DataRequired(message='欄位不能空白')])
+    content = TextAreaField('內容', validators=[DataRequired(message='欄位不能空白')])
