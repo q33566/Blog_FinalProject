@@ -233,6 +233,26 @@ li {
   padding-left: 100px;
 }
 
+.article_content div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.article_content button {
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+
+}
+.article_content button:hover {
+  background-color: #f64444;
+  color: #ffffff;
+}
+
 .article_content ul {
   display: grid;
   list-style: none;
