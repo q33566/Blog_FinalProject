@@ -72,6 +72,7 @@ def deletearticleDef(id):
     if current_user.user_id != "coffee":
         return redirect(url_for('post.home',style='recommanded_view'))
     db.session.query(Post).filter(Post.post_id == id).delete()
+    db.session.query(Comment).filter(Comment.post_id == id).delete()
     db.session.commit()
     return redirect(url_for('post.home',style='recommanded_view'))
 
