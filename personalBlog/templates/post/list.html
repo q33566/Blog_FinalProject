@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 {% from "macros/form.html" import post_meta, tag_links %}
-{% block title %}{{ tag or '' }}{% endblock title %}
+{% block title %}{{ '#' ~ tag if tag else '' }}{% endblock title %}
 {% block body %}
 <header class="masthead">
-    <div class="manuscript"><h1>{{ '#' ~ tag if tag else '稿紙' }}</h1></div>
-    <p>{{ '標籤「' ~ tag ~ '」底下的文章' if tag else '寫程式、讀書與生活的筆記。' }}</p>
+    {% if tag %}
+    <div class="manuscript"><h1>#{{ tag }}</h1></div>
+    <p>{{ posts | length }} 篇文章</p>
+    {% elif author %}
+    <div class="manuscript"><h1>{{ author.name }}</h1></div>
+    <p>{{ author.introduction.splitlines()[0] }}</p>
+    {% endif %}
 </header>
 
 {% if not tag %}
-{% set tabs = [('recommended', '推薦'), ('latest', '最新'), ('popular', '熱門')] %}
+{% set tabs = [('latest', '最新'), ('popular', '熱門')] %}
 <ul class="sort-tabs">
     {% for key, label in tabs %}
     <li><a href="{{ url_for('post.home', sort=key) }}" {% if sort == key %}aria-current="page"{% endif %}>{{ label }}</a></li>
@@ -25,7 +30,7 @@
         {{ tag_links(post.tag_list) }}
     </li>
     {% else %}
-    <li class="empty">還沒有任何文章。{% if current_user.is_admin %}<a href="{{ url_for('post.create') }}">寫第一篇</a>{% endif %}</li>
+    <li class="empty">還沒有文章。{% if current_user.is_admin %}<a href="{{ url_for('post.create') }}">寫第一篇</a>{% endif %}</li>
     {% endfor %}
 </ul>
 {% endblock body %}

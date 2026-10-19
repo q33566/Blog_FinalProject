@@ -9,7 +9,7 @@
         {{ tag_links(post.tag_list) }}
     </header>
 
-    <div class="prose">{{ post.content }}</div>
+    <div class="prose">{{ post.content | markdown }}</div>
 </article>
 
 <section class="comments" aria-labelledby="comments-heading">
@@ -18,7 +18,7 @@
         {% for comment in post.comments %}
         <li>
             <span class="author">{{ comment.user_id }}</span>
-            <time datetime="{{ comment.created_at.isoformat() }}">{{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}</time>
+            <time datetime="{{ comment.created_at.isoformat() }}">{{ comment.created_at | zh_date }}</time>
             <p>{{ comment.content }}</p>
         </li>
         {% else %}

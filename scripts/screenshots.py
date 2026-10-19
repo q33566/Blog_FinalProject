@@ -35,10 +35,6 @@ def main():
                                         device_scale_factor=2)
                 shoot(page, scheme)
                 page.close()
-            mobile = browser.new_page(viewport={'width': 390, 'height': 760}, color_scheme='dark',
-                                      device_scale_factor=2)
-            mobile.goto(f'{BASE}/posts/1')
-            mobile.screenshot(path=OUT / 'mobile-dark.png')
             browser.close()
     finally:
         server.terminate()
@@ -47,22 +43,6 @@ def main():
 def shoot(page, scheme):
     page.goto(f'{BASE}/')
     page.screenshot(path=OUT / f'home-{scheme}.png')
-    page.goto(f'{BASE}/posts/1')
-    page.screenshot(path=OUT / f'article-{scheme}.png', full_page=True)
-    if scheme == 'light':
-        page.goto(f'{BASE}/tags')
-        page.screenshot(path=OUT / 'tags.png')
-        page.goto(f'{BASE}/auth/register')
-        page.click('button[type=submit]')
-        page.screenshot(path=OUT / 'register-validation.png')
-        page.goto(f'{BASE}/auth/login')
-        page.fill('#user_id', 'admin')
-        page.fill('#password', 'admin-pass!')
-        page.click('button[type=submit]')
-        page.goto(f'{BASE}/posts/manage')
-        page.screenshot(path=OUT / 'admin-manage.png')
-        page.goto(f'{BASE}/posts/1/edit')
-        page.screenshot(path=OUT / 'admin-edit.png')
 
 
 if __name__ == '__main__':

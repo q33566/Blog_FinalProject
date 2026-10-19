@@ -8,7 +8,7 @@
         {{ form.hidden_tag() }}
         {{ field(form.title) }}
         {{ field(form.intro) }}
-        {{ field(form.tags, placeholder='例如：python, flask') }}
+        {{ field(form.tags, placeholder='用逗號分開，例如 python, docker') }}
         {{ field(form.content) }}
         <div class="actions">
             <button class="button" type="submit">{{ submit_label }}</button>

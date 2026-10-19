@@ -1,3 +1,5 @@
+from collections import Counter
+
 from flask import Blueprint, abort, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from sqlalchemy.orm import selectinload
@@ -10,9 +12,7 @@ from personalBlog.models.post import normalize_tags
 
 bp = Blueprint('post', __name__)
 
-# 首頁三種排序：推薦（發文順序）、最新、熱門（瀏覽數）
 SORTS = {
-    'recommended': Post.id.asc(),
     'latest': Post.created_at.desc(),
     'popular': Post.view_count.desc(),
 }
@@ -20,9 +20,9 @@ SORTS = {
 
 @bp.route('/')
 def home():
-    sort = request.args.get('sort', 'recommended')
+    sort = request.args.get('sort', 'latest')
     if sort not in SORTS:
-        sort = 'recommended'
+        sort = 'latest'
     posts = db.session.scalars(
         db.select(Post).options(selectinload(Post.comments)).order_by(SORTS[sort])).all()
     return render_template('post/list.html', posts=posts, sort=sort)
@@ -83,21 +83,22 @@ def delete(post_id):
 @bp.route('/posts/manage')
 @admin_required
 def manage():
-    posts = db.session.scalars(db.select(Post).order_by(Post.id)).all()
+    posts = db.session.scalars(db.select(Post).order_by(Post.created_at.desc())).all()
     return render_template('post/manage.html', posts=posts)
 
 
 @bp.route('/tags')
 def tags():
-    posts = db.session.scalars(db.select(Post).order_by(Post.id)).all()
-    all_tags = dict.fromkeys(tag for post in posts for tag in post.tag_list)
-    return render_template('post/tags.html', tags=list(all_tags))
+    posts = db.session.scalars(db.select(Post)).all()
+    counts = Counter(tag for post in posts for tag in post.tag_list)
+    return render_template('post/tags.html', tags=counts.most_common())
 
 
 @bp.route('/tags/<tag>')
 def by_tag(tag):
-    # 標籤以逗號字串儲存，用 LIKE 粗篩後再做精確比對，避免 "py" 命中 "python"
-    candidates = db.session.scalars(db.select(Post).where(Post.tags.contains(tag)).order_by(Post.id))
+    # tag 以逗號字串儲存，用 LIKE 粗篩後再做精確比對，避免 "py" 命中 "python"
+    candidates = db.session.scalars(
+        db.select(Post).where(Post.tags.contains(tag)).order_by(Post.created_at.desc()))
     posts = [post for post in candidates if tag in post.tag_list]
     if not posts:
         abort(404)

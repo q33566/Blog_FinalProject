@@ -30,7 +30,6 @@ def login():
             flash('帳號或密碼錯誤')
             return redirect(url_for('auth.login'))
         login_user(user)
-        flash('登入成功')
         return redirect(url_for('post.home'))
     return render_template('auth/login.html', form=form)
 

@@ -6,7 +6,10 @@
     <ul class="manage-list">
         {% for post in posts %}
         <li>
-            <a class="title" href="{{ url_for('post.detail', post_id=post.id) }}">{{ post.title }}</a>
+            <span>
+                <a class="title" href="{{ url_for('post.detail', post_id=post.id) }}">{{ post.title }}</a>
+                <span class="meta">{{ post.created_at | zh_date }}　{{ post.view_count }} 次閱讀</span>
+            </span>
             <span class="row-actions">
                 <a href="{{ url_for('post.edit', post_id=post.id) }}">編輯</a>
                 <form method="post" action="{{ url_for('post.delete', post_id=post.id) }}"

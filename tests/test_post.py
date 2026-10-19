@@ -11,7 +11,7 @@ def test_normalize_tags():
     assert normalize_tags(' a, b ,,a') == 'a,b'
 
 
-@pytest.mark.parametrize('sort', ['recommended', 'latest', 'popular', 'bogus'])
+@pytest.mark.parametrize('sort', ['latest', 'popular', 'bogus'])
 def test_home_sorts(client, post, sort):
     resp = client.get(f'/?sort={sort}')
     assert resp.status_code == 200

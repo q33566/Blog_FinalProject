@@ -34,7 +34,7 @@ def edit():
             about.image_filename = _save_picture(form.picture.data)
             _remove_picture(old_filename)
         db.session.commit()
-        flash('已儲存關於我')
+        flash('自我介紹已更新')
         return redirect(url_for('about.show'))
     if about is not None and not form.is_submitted():
         form.name.data = about.name

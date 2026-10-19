@@ -11,7 +11,7 @@
 
 {% macro post_meta(post) %}
 <div class="meta">
-    <time datetime="{{ post.created_at.isoformat() }}">{{ post.created_at.year }} 年 {{ post.created_at.month }} 月 {{ post.created_at.day }} 日</time>
+    <time datetime="{{ post.created_at.isoformat() }}">{{ post.created_at | zh_date }}</time>
     <span>{{ post.view_count }} 次閱讀</span>
     <span>{{ post.comments | length }} 則留言</span>
 </div>

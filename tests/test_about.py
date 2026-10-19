@@ -7,7 +7,7 @@ FORM = {'name': 'Kurt', 'about_me': 'hi there', 'email': 'kurt@example.com'}
 
 
 def test_empty_about_page(client):
-    assert '部落格擁有者沒有提供個人訊息' in client.get('/about').get_data(as_text=True)
+    assert '這裡還沒有自我介紹' in client.get('/about').get_data(as_text=True)
 
 
 def test_reader_cannot_edit_about(reader_client):

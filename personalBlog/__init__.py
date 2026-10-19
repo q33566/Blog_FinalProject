@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import click
 from flask import Flask, render_template
@@ -24,6 +25,16 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(about_bp, url_prefix='/about')
 
+    from personalBlog.rendering import render_markdown, zh_date
+    app.jinja_env.filters['markdown'] = render_markdown
+    app.jinja_env.filters['zh_date'] = zh_date
+
+    @app.context_processor
+    def inject_author():
+        # 頁尾和首頁刊頭都會用到作者資料
+        from personalBlog.models import About
+        return {'author': db.session.scalar(db.select(About)), 'now': datetime.now()}
+
     register_error_handlers(app)
     register_commands(app)
 
@@ -34,7 +45,7 @@ def create_app(config_class=Config):
 
 
 def register_error_handlers(app):
-    messages = {403: '你沒有權限執行這個動作', 404: '找不到這個頁面', 413: '上傳的檔案太大'}
+    messages = {403: '你沒有權限查看這個頁面', 404: '找不到這個頁面', 413: '圖片太大，請小於 16 MB'}
 
     def handle(error):
         return render_template('error.html', code=error.code, message=messages[error.code]), error.code
