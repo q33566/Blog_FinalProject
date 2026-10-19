@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "macros/form.html" import post_meta, tag_links %}
+{% block title %}{{ tag or '' }}{% endblock title %}
+{% block body %}
+<header class="masthead">
+    <div class="manuscript"><h1>{{ '#' ~ tag if tag else '稿紙' }}</h1></div>
+    <p>{{ '標籤「' ~ tag ~ '」底下的文章' if tag else '寫程式、讀書與生活的筆記。' }}</p>
+</header>
+
+{% if not tag %}
+{% set tabs = [('recommended', '推薦'), ('latest', '最新'), ('popular', '熱門')] %}
+<ul class="sort-tabs">
+    {% for key, label in tabs %}
+    <li><a href="{{ url_for('post.home', sort=key) }}" {% if sort == key %}aria-current="page"{% endif %}>{{ label }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<ul class="post-list">
+    {% for post in posts %}
+    <li>
+        <h2><a href="{{ url_for('post.detail', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <p>{{ post.intro }}</p>
+        {{ post_meta(post) }}
+        {{ tag_links(post.tag_list) }}
+    </li>
+    {% else %}
+    <li class="empty">還沒有任何文章。{% if current_user.is_admin %}<a href="{{ url_for('post.create') }}">寫第一篇</a>{% endif %}</li>
+    {% endfor %}
+</ul>
+{% endblock body %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "macros/form.html" import field %}
+{% block title %}{{ heading }}{% endblock title %}
+{% block body %}
+<section class="form-page">
+    <h1>{{ heading }}</h1>
+    <form novalidate method="post">
+        {{ form.hidden_tag() }}
+        {{ field(form.title) }}
+        {{ field(form.intro) }}
+        {{ field(form.tags, placeholder='例如：python, flask') }}
+        {{ field(form.content) }}
+        <div class="actions">
+            <button class="button" type="submit">{{ submit_label }}</button>
+            <a href="{{ request.referrer or url_for('post.home') }}">取消</a>
+        </div>
+    </form>
+</section>
+{% endblock body %}

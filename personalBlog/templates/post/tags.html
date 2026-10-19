@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "macros/form.html" import tag_links %}
+{% block title %}標籤{% endblock title %}
+{% block body %}
+<header class="masthead">
+    <div class="manuscript"><h1>標籤</h1></div>
+    <p>共 {{ tags | length }} 個標籤，點進去看相關文章。</p>
+</header>
+{% if tags %}
+{{ tag_links(tags, 'tag-cloud') }}
+{% else %}
+<p class="empty">還沒有任何標籤。</p>
+{% endif %}
+{% endblock body %}

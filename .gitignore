@@ -1,8 +1,10 @@
 .venv/
+.idea/
+.vscode/
+.DS_Store
 
 *.pyc
 __pycache__/
-
 
 .pytest_cache/
 .coverage
@@ -11,5 +13,7 @@ htmlcov/
 dist/
 build/
 *.egg-info/
-instance*
-uploads
+
+# SQLite 資料庫與使用者上傳的檔案
+instance/
+personalBlog/static/uploads/

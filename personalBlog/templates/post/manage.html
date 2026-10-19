@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}管理文章{% endblock title %}
+{% block body %}
+<section class="form-page">
+    <h1>管理文章</h1>
+    <ul class="manage-list">
+        {% for post in posts %}
+        <li>
+            <a class="title" href="{{ url_for('post.detail', post_id=post.id) }}">{{ post.title }}</a>
+            <span class="row-actions">
+                <a href="{{ url_for('post.edit', post_id=post.id) }}">編輯</a>
+                <form method="post" action="{{ url_for('post.delete', post_id=post.id) }}"
+                      onsubmit="return confirm('確定要刪除「{{ post.title }}」嗎？留言也會一併刪除。')">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="link-danger">刪除</button>
+                </form>
+            </span>
+        </li>
+        {% else %}
+        <li class="empty">還沒有文章。<a href="{{ url_for('post.create') }}">寫第一篇</a></li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock body %}

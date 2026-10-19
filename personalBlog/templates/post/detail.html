@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "macros/form.html" import field, post_meta, tag_links %}
+{% block title %}{{ post.title }}{% endblock title %}
+{% block body %}
+<article>
+    <header class="article-header">
+        <div class="manuscript"><h1>{{ post.title }}</h1></div>
+        {{ post_meta(post) }}
+        {{ tag_links(post.tag_list) }}
+    </header>
+
+    <div class="prose">{{ post.content }}</div>
+</article>
+
+<section class="comments" aria-labelledby="comments-heading">
+    <h2 id="comments-heading">留言</h2>
+    <ul class="comment-list">
+        {% for comment in post.comments %}
+        <li>
+            <span class="author">{{ comment.user_id }}</span>
+            <time datetime="{{ comment.created_at.isoformat() }}">{{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}</time>
+            <p>{{ comment.content }}</p>
+        </li>
+        {% else %}
+        <li class="login-hint">還沒有留言。</li>
+        {% endfor %}
+    </ul>
+
+    {% if current_user.is_authenticated %}
+    <form action="{{ url_for('post.add_comment', post_id=post.id) }}" method="post">
+        {{ form.hidden_tag() }}
+        {{ field(form.content, rows=3, placeholder='留下你的想法') }}
+        <button type="submit" class="button">送出留言</button>
+    </form>
+    {% else %}
+    <p class="login-hint"><a href="{{ url_for('auth.login') }}">登入</a>後就可以留言。</p>
+    {% endif %}
+</section>
+{% endblock body %}

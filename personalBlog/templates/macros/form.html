@@ -1,0 +1,26 @@
+{# 渲染單一表單欄位：label + input + 錯誤訊息 #}
+{% macro field(f) %}
+<div class="field{% if f.errors %} has-error{% endif %}">
+    {{ f.label }}
+    {{ f(**kwargs) }}
+    {% for error in f.errors %}
+    <span class="error">{{ error }}</span>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro post_meta(post) %}
+<div class="meta">
+    <time datetime="{{ post.created_at.isoformat() }}">{{ post.created_at.year }} 年 {{ post.created_at.month }} 月 {{ post.created_at.day }} 日</time>
+    <span>{{ post.view_count }} 次閱讀</span>
+    <span>{{ post.comments | length }} 則留言</span>
+</div>
+{% endmacro %}
+
+{% macro tag_links(tags, extra_class='') %}
+<ul class="tags {{ extra_class }}">
+    {% for t in tags %}
+    <li><a href="{{ url_for('post.by_tag', tag=t) }}">{{ t }}</a></li>
+    {% endfor %}
+</ul>
+{% endmacro %}

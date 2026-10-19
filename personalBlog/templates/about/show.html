@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}關於{% endblock title %}
+{% block body %}
+{% if about %}
+<section class="about">
+    {% if about.image_filename %}
+    <img src="{{ url_for('static', filename=config.UPLOAD_SUBDIR ~ '/' ~ about.image_filename) }}" alt="{{ about.name }} 的大頭貼">
+    {% else %}
+    <div class="avatar-fallback" aria-hidden="true">{{ about.name[0] }}</div>
+    {% endif %}
+    <div>
+        <h1>{{ about.name }}</h1>
+        <p class="bio">{{ about.introduction }}</p>
+        <p>聯絡我：<a href="mailto:{{ about.email }}">{{ about.email }}</a></p>
+    </div>
+</section>
+{% else %}
+<p class="empty">部落格擁有者沒有提供個人訊息</p>
+{% endif %}
+
+{% if current_user.is_admin %}
+<p class="actions"><a class="button quiet" href="{{ url_for('about.edit') }}">編輯關於我</a></p>
+{% endif %}
+{% endblock body %}
